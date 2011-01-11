@@ -26,10 +26,14 @@
 			android:title="use_custom_date"
 			android:summary="summary"
 			android:defaultValue="false" />
-<!--		<org.bostonandroid.datepreference.DatePreference-->
-<!--			android:key="@string/pref_custom_date_key"-->
-<!--			android:title="select_custom_date"-->
-<!--			android:defaultValue="2011.01.01" />-->
+		<!--		<org.bostonandroid.datepreference.DatePreference-->
+		<!--			android:key="@string/pref_custom_date_key"-->
+		<!--			android:title="select_custom_date"-->
+		<!--			android:defaultValue="2011.01.01" />-->
+		<com.leinardi.ubuntucountdownwidget.customviews.DatePreference
+			android:key="@string/pref_custom_date_key"
+			android:title="custom_date"
+			android:summary="summary" />
 	</PreferenceCategory>
 	<PreferenceCategory
 		android:title="@string/info">
