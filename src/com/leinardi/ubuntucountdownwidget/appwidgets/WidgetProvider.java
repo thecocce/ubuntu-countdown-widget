@@ -17,9 +17,19 @@
  *  
  */
 
+/*
+ * TODO
+ * 
+ * FIX the 2.2 HVGA bug!!!
+ * Support for ldpi (QVGA)
+ * Config Activity
+ * 
+ */
+
 package com.leinardi.ubuntucountdownwidget.appwidgets;
 
 import com.leinardi.ubuntucountdownwidget.R;
+import com.leinardi.ubuntucountdownwidget.misc.Constants;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
@@ -46,7 +56,6 @@ import java.util.concurrent.TimeUnit;
 
 public class WidgetProvider extends AppWidgetProvider {
     private static final String TAG="UbuntuWidget";
-    private static final String FORCE_WIDGET_UPDATE = "com.leinardi.ubuntucountdownwidget.FORCE_WIDGET_UPDATE";
 
     @Override
     public void onEnabled(Context context) {
@@ -59,7 +68,7 @@ public class WidgetProvider extends AppWidgetProvider {
 
         AlarmManager alarmManager = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
 
-        PendingIntent pi = PendingIntent.getBroadcast(context, 0, new Intent(FORCE_WIDGET_UPDATE), 0);
+        PendingIntent pi = PendingIntent.getBroadcast(context, 0, new Intent(Constants.FORCE_WIDGET_UPDATE), 0);
 
         GregorianCalendar gcal = new GregorianCalendar(TimeZone.getTimeZone("UTC"));
         Log.d(TAG, gcal.getTime().toLocaleString());
@@ -85,8 +94,11 @@ public class WidgetProvider extends AppWidgetProvider {
     public void onReceive(Context context, Intent intent) {
         final String action = intent.getAction();
 
-        if(FORCE_WIDGET_UPDATE.equals(action)){
-            Log.d(TAG,"broadcast "+FORCE_WIDGET_UPDATE+" catched!");
+        if(action.equals(Constants.FORCE_WIDGET_UPDATE) ||
+                action.equals(Intent.ACTION_TIMEZONE_CHANGED)||
+                //action.equals(Intent.ACTION_DATE_CHANGED) ||
+                action.equals(Intent.ACTION_TIME_CHANGED)){
+            Log.d(TAG,"broadcast "+ action +" catched!");
             updateWidget(context);
         }
 
@@ -115,10 +127,10 @@ public class WidgetProvider extends AppWidgetProvider {
         Log.d(TAG, "updateWidget");
         GregorianCalendar today = new GregorianCalendar();
         Log.d(TAG, "today: " + today.getTime().toLocaleString());
-        GregorianCalendar ubuntuReleaseDay = new GregorianCalendar(2011, Calendar.APRIL, 28);
-        Log.d(TAG, "ubuntuReleaseDay: " + ubuntuReleaseDay.getTime().toLocaleString());
+        
+        Log.d(TAG, "ubuntuReleaseDay: " + Constants.ubuntuReleaseDay.getTime().toLocaleString());
 
-        long millisLeft = ubuntuReleaseDay.getTimeInMillis()-today.getTimeInMillis();
+        long millisLeft = Constants.ubuntuReleaseDay.getTimeInMillis()-today.getTimeInMillis();
         // Only API Level 9 --> TimeUnit.MILLISECONDS.toHours(millisLeft);
         long hoursLeft = millisLeft / (1000 * 60 * 60); 
 
@@ -143,7 +155,7 @@ public class WidgetProvider extends AppWidgetProvider {
 
         for(int appWidgetId : appWidgetIds){
             Log.d(TAG, "appWidgetId: " + appWidgetId);
-            //            views.setViewVisibility(R.id.progress_bar, View.GONE);
+            views.setViewVisibility(R.id.progress_bar, View.GONE);
             views.setViewVisibility(R.id.tv_footer, View.VISIBLE);
 
             if(millisLeft > DateUtils.DAY_IN_MILLIS){

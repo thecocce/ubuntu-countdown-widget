@@ -27,6 +27,18 @@
 		name="release_number">11.04</string>
 	<string
 		name="ok">OK</string>
+	<string
+		name="cancel">Cancel</string>
+	<string
+		name="yes">Yes</string>
+	<string
+		name="no">No</string>
+	<string
+		name="back">Back</string>
+	<string
+		name="next">Next</string>
+	<string
+		name="default_text">Default</string>
 
 	<!-- Eula -->
 	<string
@@ -37,4 +49,26 @@
 		name="eula_refuse">Refuse</string>
 	<string
 		name="pref_display_eula_summary">Display application license</string>
+
+	<string
+		name="info">Info</string>
+	<!-- Preferences -->
+	<string
+		name="pref_info_version">Version</string>
+	<string
+		name="pref_info_version_error">Unable to determine version</string>
+	<string
+		name="pref_info_summary">Info, FAQ and Acknowledgements</string>
+	<string
+		name="pref_donate">Support Libretto Universitario</string>
+	<string
+		name="pref_donate_summary">Help us to keep it free and without ads</string>
+	<string
+		name="pref_report_a_bug">Report a Bug</string>
+	<string
+		name="pref_report_a_bug_summary">Submit a new issue to the issue tracker</string>
+	<string
+		name="pref_display_changelog_summary">Display application changelog</string>
+	<string
+		name="pref_display_settings">Display settings</string>
 </resources>

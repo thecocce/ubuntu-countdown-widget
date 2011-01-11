@@ -63,9 +63,13 @@
 		android:text="@string/days_left"
 		android:visibility="invisible"
 		android:textSize="20dip" />
-	<!--	<ProgressBar-->
-	<!--		android:layout_height="wrap_content"-->
-	<!--		android:layout_width="wrap_content"-->
-	<!--		android:layout_centerInParent="true"-->
-	<!--		android:id="@+id/progress_bar" />-->
+	<FrameLayout
+		android:layout_height="wrap_content"
+		android:id="@+id/progress_bar"
+		android:layout_width="wrap_content"
+		android:layout_centerInParent="true">
+		<ProgressBar
+			android:layout_height="wrap_content"
+			android:layout_width="wrap_content" />
+	</FrameLayout>
 </RelativeLayout>

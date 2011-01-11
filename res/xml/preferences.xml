@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<!--
+		Libretto Universitario Copyright (C) 2010 Roberto Leinardi This
+		program is free software: you can redistribute it and/or modify it
+		under the terms of the GNU General Public License as published by the
+		Free Software Foundation, either version 3 of the License, or (at your
+		option) any later version. This program is distributed in the hope
+		that it will be useful, but WITHOUT ANY WARRANTY; without even the
+		implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
+		PURPOSE. See the GNU General Public License for more details. You
+		should have received a copy of the GNU General Public License along
+		with this program. If not, see <http://www.gnu.org/licenses/>.
+	-->
+
+<PreferenceScreen
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res/com.leinardi.ubuntucountdownwidget">
+	<PreferenceCategory
+		android:title="@string/info">
+		<Preference
+			android:key="@string/pref_default_release_date_key"
+			style="?android:preferenceInformationStyle"
+			android:title="default_release_date" />
+		<CheckBoxPreference
+			android:key="@string/pref_custom_date_checkbox_key"
+			android:title="use_custom_date"
+			android:summary="summary"
+			android:defaultValue="false" />
+<!--		<org.bostonandroid.datepreference.DatePreference-->
+<!--			android:key="@string/pref_custom_date_key"-->
+<!--			android:title="select_custom_date"-->
+<!--			android:defaultValue="2011.01.01" />-->
+	</PreferenceCategory>
+	<PreferenceCategory
+		android:title="@string/info">
+		<Preference
+			android:key="@string/pref_info_version_key"
+			style="?android:preferenceInformationStyle"
+			android:title="@string/pref_info_version" />
+		<com.leinardi.ubuntucountdownwidget.customviews.DonateDialogPreference
+			app:fileName="@string/changelog_filename"
+			android:key="@string/pref_donate_key"
+			android:title="@string/pref_donate"
+			android:summary="@string/pref_donate_summary"
+			android:dialogIcon="@drawable/ic_dialog_beer"
+			android:dialogTitle="@string/pref_donate"
+			android:dialogMessage="@string/donate_message"
+			android:positiveButtonText="@string/yes"
+			android:negativeButtonText="@string/no" />
+		<Preference
+			android:key="@string/pref_info_key"
+			android:title="@string/info"
+			android:summary="@string/pref_info_summary" />
+		<Preference
+			android:key="@string/pref_report_a_bug_key"
+			android:title="@string/pref_report_a_bug"
+			android:summary="@string/pref_report_a_bug_summary" />
+		<com.leinardi.ubuntucountdownwidget.customviews.MyDialogPreference
+			app:fileName="@string/changelog_filename"
+			android:key="@string/pref_changelog_key"
+			android:title="@string/changelog_title"
+			android:summary="@string/pref_display_changelog_summary"
+			android:dialogIcon="@drawable/ic_dialog_info"
+			android:dialogTitle="@string/changelog_title"
+			android:negativeButtonText="@null" />
+		<com.leinardi.ubuntucountdownwidget.customviews.MyDialogPreference
+			app:fileName="@string/eula_filename"
+			android:key="@string/pref_eula_key"
+			android:title="@string/eula_title"
+			android:summary="@string/pref_display_eula_summary"
+			android:dialogIcon="@drawable/ic_dialog_agenda"
+			android:dialogTitle="@string/eula_title"
+			android:negativeButtonText="@null" />
+	</PreferenceCategory>
+	<!--	<PreferenceCategory-->
+	<!--		android:title="@string/pref_university_settings">-->
+	<!--		<ListPreference-->
+	<!--			android:key="@string/pref_laude_value_key"-->
+	<!--			android:defaultValue="30"-->
+	<!--			android:title="@string/pref_laude_value"-->
+	<!--			android:summary="@string/pref_laude_value_summary"-->
+	<!--			android:entries="@array/laude_value_entries"-->
+	<!--			android:entryValues="@array/laude_value_values"-->
+	<!--			android:dialogTitle="@string/pref_laude_value_title" />-->
+	<!--	</PreferenceCategory>-->
+	<!--	<PreferenceCategory-->
+	<!--		android:title="@string/pref_display_settings">-->
+	<!--		<CheckBoxPreference-->
+	<!--			android:key="@string/pref_animations_key"-->
+	<!--			android:title="@string/pref_animations_label"-->
+	<!--			android:summaryOn="@string/pref_animations_label_summary_on"-->
+	<!--			android:summaryOff="@string/pref_animations_label_summary_off"-->
+	<!--			android:defaultValue="true" />-->
+	<!--
+		<com.leinardi.librettouniversitario.customviews.SetMaxCreditsDialogPreference
+	-->
+	<!--			android:title="@string/pref_maximum_credits"-->
+	<!--			android:summary="@string/pref_maximum_credits_summary"-->
+	<!--			android:dialogIcon="@drawable/ic_dialog_info"-->
+	<!--			android:dialogTitle="@string/maximum_credits_title" />-->
+	<!--		<CheckBoxPreference-->
+	<!--			android:key="@string/pref_show_credits_decimals_key"-->
+	<!--			android:title="@string/pref_show_credits_decimals"-->
+	<!--			android:summary="@string/pref_show_credits_decimals_summary"-->
+	<!--			android:defaultValue="true" />-->
+	<!--		<CheckBoxPreference-->
+	<!--			android:key="@string/pref_marks_color_key"-->
+	<!--			android:title="@string/pref_marks_color"-->
+	<!--			android:summary="@string/pref_marks_color_summary"-->
+	<!--			android:defaultValue="true" />-->
+	<!--		<CheckBoxPreference-->
+	<!--			android:key="@string/pref_expand_exams_key"-->
+	<!--			android:title="@string/pref_expand_exams"-->
+	<!--			android:summary="@string/pref_expand_exams_summary"-->
+	<!--			android:defaultValue="false" />-->
+	<!--		<ListPreference-->
+	<!--			android:key="@string/pref_marks_order_by_key"-->
+	<!--			android:defaultValue="date"-->
+	<!--			android:title="@string/pref_marks_sort_order"-->
+	<!--			android:summary="@string/pref_marks_sort_order_summary"-->
+	<!--			android:entries="@array/marks_sort_order_entries"-->
+	<!--			android:entryValues="@array/marks_sort_order_values"-->
+	<!--			android:dialogTitle="@string/pref_marks_sort_order_title" />-->
+	<!--		<CheckBoxPreference-->
+	<!--			android:key="@string/pref_marks_order_desc_key"-->
+	<!--			android:title="@string/pref_descending_order"-->
+	<!--			android:summary="@string/pref_descending_order_summary"-->
+	<!--			android:defaultValue="false" />-->
+	<!--	</PreferenceCategory>-->
+</PreferenceScreen>
+
