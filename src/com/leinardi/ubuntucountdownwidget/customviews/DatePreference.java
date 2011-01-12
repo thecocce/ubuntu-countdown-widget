@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (C) 2009-2010 Felix Bechstein
  *
  * This file is part of Call Meter 3G.
@@ -19,6 +19,7 @@
 
 package com.leinardi.ubuntucountdownwidget.customviews;
 
+import com.leinardi.ubuntucountdownwidget.misc.Constants;
 import com.leinardi.ubuntucountdownwidget.misc.Log;
 
 import java.util.Calendar;
@@ -38,7 +39,7 @@ DatePicker.OnDateChangedListener {
     /** Tag for output. */
     private static final String TAG = "DatePreference";
     /** Global default value. */
-    public static final long DEFAULT_VALUE = 1262300400001L; // 1.1.2010
+    public static final long DEFAULT_VALUE = Constants.ubuntuReleaseCal.getTimeInMillis();
     /** Default value. */
     private long defValue = DEFAULT_VALUE;
 

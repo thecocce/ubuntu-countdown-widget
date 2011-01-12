@@ -29,6 +29,7 @@
 package com.leinardi.ubuntucountdownwidget.appwidgets;
 
 import com.leinardi.ubuntucountdownwidget.R;
+import com.leinardi.ubuntucountdownwidget.customviews.DatePreference;
 import com.leinardi.ubuntucountdownwidget.misc.Constants;
 
 import android.app.AlarmManager;
@@ -70,7 +71,7 @@ public class WidgetProvider extends AppWidgetProvider {
 
         PendingIntent pi = PendingIntent.getBroadcast(context, 0, new Intent(Constants.FORCE_WIDGET_UPDATE), 0);
 
-        GregorianCalendar gcal = new GregorianCalendar(TimeZone.getTimeZone("UTC"));
+        GregorianCalendar gcal = new GregorianCalendar();
         Log.d(TAG, gcal.getTime().toLocaleString());
         gcal.set(Calendar.HOUR_OF_DAY, 0);
         gcal.set(Calendar.MINUTE, 0);
@@ -127,10 +128,20 @@ public class WidgetProvider extends AppWidgetProvider {
         Log.d(TAG, "updateWidget");
         GregorianCalendar today = new GregorianCalendar();
         Log.d(TAG, "today: " + today.getTime().toLocaleString());
-        
-        Log.d(TAG, "ubuntuReleaseDay: " + Constants.ubuntuReleaseDay.getTime().toLocaleString());
 
-        long millisLeft = Constants.ubuntuReleaseDay.getTimeInMillis()-today.getTimeInMillis();
+        GregorianCalendar ubuntuReleaseDay = (GregorianCalendar) Constants.ubuntuReleaseCal.clone();
+        
+        Log.d(TAG, "ubuntuReleaseCal: " + ubuntuReleaseDay.getTime().toLocaleString());
+        
+        SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(context);
+
+        long ubuntuReleaseMillis = mPrefs.getLong(context.getString(R.string.pref_custom_date_key), DatePreference.DEFAULT_VALUE);
+
+        ubuntuReleaseDay.setTimeInMillis(ubuntuReleaseMillis);
+
+
+
+        long millisLeft = ubuntuReleaseDay.getTimeInMillis()-today.getTimeInMillis();
         // Only API Level 9 --> TimeUnit.MILLISECONDS.toHours(millisLeft);
         long hoursLeft = millisLeft / (1000 * 60 * 60); 
 

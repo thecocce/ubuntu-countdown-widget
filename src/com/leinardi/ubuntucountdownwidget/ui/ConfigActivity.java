@@ -19,37 +19,53 @@
 
 package com.leinardi.ubuntucountdownwidget.ui;
 
+import com.leinardi.ubuntucountdownwidget.customviews.DatePreference;
 import com.leinardi.ubuntucountdownwidget.misc.Log;
 import com.leinardi.ubuntucountdownwidget.R;
 import com.leinardi.ubuntucountdownwidget.misc.Constants;
 
 import android.appwidget.AppWidgetManager;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.preference.CheckBoxPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
+import android.preference.PreferenceManager;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.view.KeyEvent;
 
 import java.text.DateFormat;
 import java.util.Locale;
 
-public class ConfigActivity extends PreferenceActivity {
+public class ConfigActivity extends PreferenceActivity implements OnSharedPreferenceChangeListener {
     private final static String TAG = "ConfigActivity";
     private static String CONFIGURE_ACTION="android.appwidget.action.APPWIDGET_CONFIGURE";
     private final String REPORT_A_BUG_URL = "http://code.google.com/p/ubuntu-countdown-widget/issues/list";
+
+    SharedPreferences mPrefs;
+    Preference customDatePicker;
+    CheckBoxPreference customDateCheckbox;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         addPreferencesFromResource(R.xml.preferences);
-        String releaseDate = DateFormat.getDateInstance(DateFormat.LONG, Locale.getDefault()).format(Constants.ubuntuReleaseDay.getTime());
+
+        mPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+
+        String releaseDate = DateFormat.getDateInstance(DateFormat.LONG,
+                Locale.getDefault()).format(Constants.ubuntuReleaseCal.getTime());
         findPreference(getString(R.string.pref_default_release_date_key)).setSummary(releaseDate);
+
+        customDateCheckbox = (CheckBoxPreference) findPreference(getString(R.string.pref_custom_date_checkbox_key));
+        customDatePicker = findPreference(getString(R.string.pref_custom_date_key));
 
         String version;
         try {
@@ -74,45 +90,79 @@ public class ConfigActivity extends PreferenceActivity {
     }
 
     @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (keyCode==KeyEvent.KEYCODE_BACK &&
-                Integer.parseInt(Build.VERSION.SDK)<5) {
+    protected void onResume() {
+        super.onResume();
+
+        if(!customDateCheckbox.isChecked()){
+            mPrefs.edit().putLong(getString(R.string.pref_custom_date_key),
+                    Constants.ubuntuReleaseCal.getTimeInMillis()).commit();
+        }
+        // Setup the initial values
+        long dateInMillis = mPrefs.getLong(getString(R.string.pref_custom_date_key),
+                DatePreference.DEFAULT_VALUE);
+        customDatePicker.setSummary(DateFormat.getDateInstance(DateFormat.LONG,
+                Locale.getDefault()).format(dateInMillis));
+
+        // Set up a listener whenever a key changes            
+        getPreferenceScreen().getSharedPreferences().registerOnSharedPreferenceChangeListener(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        // Unregister the listener whenever a key changes            
+        getPreferenceScreen().getSharedPreferences().unregisterOnSharedPreferenceChangeListener(this);    
+    }
+
+    @Override
+    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+        // Let's do something a preference value changes
+        if (key.equals(getString(R.string.pref_custom_date_key))) {
+            long dateInMillis = sharedPreferences.getLong(getString(R.string.pref_custom_date_key),
+                    DatePreference.DEFAULT_VALUE);
+            customDatePicker.setSummary(DateFormat.getDateInstance(DateFormat.LONG,
+                    Locale.getDefault()).format(dateInMillis));
+        }
+    }
+
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event)  {
+        if (android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.ECLAIR
+                && keyCode == KeyEvent.KEYCODE_BACK
+                && event.getRepeatCount() == 0) {
+            // Take care of calling this method on earlier versions of
+            // the platform where it doesn't exist.
             onBackPressed();
         }
 
-        return(super.onKeyDown(keyCode, event));
+        return super.onKeyDown(keyCode, event);
     }
 
     @Override
     public void onBackPressed() {
+        // This will be called either automatically for you on 2.0
+        // or later, or by the code above on earlier versions of the
+        // platform.
+        
         resultIntent();
-        super.onBackPressed();
+        finish();
+        return;
     }
 
     private void resultIntent() {
+        sendBroadcast(new Intent(Constants.FORCE_WIDGET_UPDATE));
         if (CONFIGURE_ACTION.equals(getIntent().getAction())) {
             Intent intent=getIntent();
             Bundle extras=intent.getExtras();
-
             if (extras!=null) {
                 int appWidgetId=extras.getInt(AppWidgetManager.EXTRA_APPWIDGET_ID, AppWidgetManager.INVALID_APPWIDGET_ID);
-                //                AppWidgetManager mgr=AppWidgetManager.getInstance(this);
-                //                RemoteViews views=new RemoteViews(getPackageName(), R.layout.widget);
-                //
-                //                mgr.updateAppWidget(id, views);
-
                 Intent result=new Intent();
 
                 result.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
                 setResult(RESULT_OK, result);
-
-                //                Intent update=new Intent(this, Widget.class);
-                //
-                //                update.setAction(Constants.FORCE_WIDGET_UPDATE);
-                //                sendBroadcast(update);
             }
         }
+    }
 
-
-    } 
 }

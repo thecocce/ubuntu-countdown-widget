@@ -26,7 +26,7 @@ public class Constants {
     
     public static final String FORCE_WIDGET_UPDATE = "com.leinardi.ubuntucountdownwidget.FORCE_WIDGET_UPDATE";
     
-    public static final GregorianCalendar ubuntuReleaseDay = new GregorianCalendar(2011, Calendar.APRIL, 28);
+    public static final GregorianCalendar ubuntuReleaseCal = new GregorianCalendar(2011, Calendar.APRIL, 28);
 	
 	public static final String PREF_CHANGELOG = "changelog";
 	public static final String PREF_APP_VERSION = "app.version";

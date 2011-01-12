@@ -26,12 +26,9 @@
 			android:title="use_custom_date"
 			android:summary="summary"
 			android:defaultValue="false" />
-		<!--		<org.bostonandroid.datepreference.DatePreference-->
-		<!--			android:key="@string/pref_custom_date_key"-->
-		<!--			android:title="select_custom_date"-->
-		<!--			android:defaultValue="2011.01.01" />-->
 		<com.leinardi.ubuntucountdownwidget.customviews.DatePreference
 			android:key="@string/pref_custom_date_key"
+			android:dependency="@string/pref_custom_date_checkbox_key"
 			android:title="custom_date"
 			android:summary="summary" />
 	</PreferenceCategory>
@@ -51,10 +48,10 @@
 			android:dialogMessage="@string/donate_message"
 			android:positiveButtonText="@string/yes"
 			android:negativeButtonText="@string/no" />
-		<Preference
-			android:key="@string/pref_info_key"
-			android:title="@string/info"
-			android:summary="@string/pref_info_summary" />
+<!--		<Preference-->
+<!--			android:key="@string/pref_info_key"-->
+<!--			android:title="@string/info"-->
+<!--			android:summary="@string/pref_info_summary" />-->
 		<Preference
 			android:key="@string/pref_report_a_bug_key"
 			android:title="@string/pref_report_a_bug"
@@ -76,60 +73,6 @@
 			android:dialogTitle="@string/eula_title"
 			android:negativeButtonText="@null" />
 	</PreferenceCategory>
-	<!--	<PreferenceCategory-->
-	<!--		android:title="@string/pref_university_settings">-->
-	<!--		<ListPreference-->
-	<!--			android:key="@string/pref_laude_value_key"-->
-	<!--			android:defaultValue="30"-->
-	<!--			android:title="@string/pref_laude_value"-->
-	<!--			android:summary="@string/pref_laude_value_summary"-->
-	<!--			android:entries="@array/laude_value_entries"-->
-	<!--			android:entryValues="@array/laude_value_values"-->
-	<!--			android:dialogTitle="@string/pref_laude_value_title" />-->
-	<!--	</PreferenceCategory>-->
-	<!--	<PreferenceCategory-->
-	<!--		android:title="@string/pref_display_settings">-->
-	<!--		<CheckBoxPreference-->
-	<!--			android:key="@string/pref_animations_key"-->
-	<!--			android:title="@string/pref_animations_label"-->
-	<!--			android:summaryOn="@string/pref_animations_label_summary_on"-->
-	<!--			android:summaryOff="@string/pref_animations_label_summary_off"-->
-	<!--			android:defaultValue="true" />-->
-	<!--
-		<com.leinardi.librettouniversitario.customviews.SetMaxCreditsDialogPreference
-	-->
-	<!--			android:title="@string/pref_maximum_credits"-->
-	<!--			android:summary="@string/pref_maximum_credits_summary"-->
-	<!--			android:dialogIcon="@drawable/ic_dialog_info"-->
-	<!--			android:dialogTitle="@string/maximum_credits_title" />-->
-	<!--		<CheckBoxPreference-->
-	<!--			android:key="@string/pref_show_credits_decimals_key"-->
-	<!--			android:title="@string/pref_show_credits_decimals"-->
-	<!--			android:summary="@string/pref_show_credits_decimals_summary"-->
-	<!--			android:defaultValue="true" />-->
-	<!--		<CheckBoxPreference-->
-	<!--			android:key="@string/pref_marks_color_key"-->
-	<!--			android:title="@string/pref_marks_color"-->
-	<!--			android:summary="@string/pref_marks_color_summary"-->
-	<!--			android:defaultValue="true" />-->
-	<!--		<CheckBoxPreference-->
-	<!--			android:key="@string/pref_expand_exams_key"-->
-	<!--			android:title="@string/pref_expand_exams"-->
-	<!--			android:summary="@string/pref_expand_exams_summary"-->
-	<!--			android:defaultValue="false" />-->
-	<!--		<ListPreference-->
-	<!--			android:key="@string/pref_marks_order_by_key"-->
-	<!--			android:defaultValue="date"-->
-	<!--			android:title="@string/pref_marks_sort_order"-->
-	<!--			android:summary="@string/pref_marks_sort_order_summary"-->
-	<!--			android:entries="@array/marks_sort_order_entries"-->
-	<!--			android:entryValues="@array/marks_sort_order_values"-->
-	<!--			android:dialogTitle="@string/pref_marks_sort_order_title" />-->
-	<!--		<CheckBoxPreference-->
-	<!--			android:key="@string/pref_marks_order_desc_key"-->
-	<!--			android:title="@string/pref_descending_order"-->
-	<!--			android:summary="@string/pref_descending_order_summary"-->
-	<!--			android:defaultValue="false" />-->
-	<!--	</PreferenceCategory>-->
+	
 </PreferenceScreen>
 
