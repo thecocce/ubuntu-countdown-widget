@@ -1,6 +1,6 @@
 /**
- *  Libretto Universitario
- *  Copyright (C) 2010 Roberto Leinardi
+ *  Ubuntu Countdown Widget
+ *  Copyright (C) 2011 Roberto Leinardi
  *  
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by

@@ -20,9 +20,9 @@
 /*
  * TODO
  * 
- * FIX the 2.2 HVGA bug!!!
  * Support for ldpi (QVGA)
- * Config Activity
+ * Do a better translation
+ * Add italian localization
  * 
  */
 
@@ -31,6 +31,7 @@ package com.leinardi.ubuntucountdownwidget.appwidgets;
 import com.leinardi.ubuntucountdownwidget.R;
 import com.leinardi.ubuntucountdownwidget.customviews.DatePreference;
 import com.leinardi.ubuntucountdownwidget.misc.Constants;
+import com.leinardi.ubuntucountdownwidget.misc.Log;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
@@ -40,23 +41,18 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.Bundle;
-import android.os.SystemClock;
 import android.preference.PreferenceManager;
 import android.text.format.DateUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.RemoteViews;
 
 import java.util.Calendar;
-import java.util.Date;
+
 import java.util.GregorianCalendar;
-import java.util.Locale;
-import java.util.TimeZone;
-import java.util.concurrent.TimeUnit;
+
 
 public class WidgetProvider extends AppWidgetProvider {
-    private static final String TAG="UbuntuWidget";
+    private static final String TAG="WidgetProvider";
 
     @Override
     public void onEnabled(Context context) {
@@ -75,7 +71,7 @@ public class WidgetProvider extends AppWidgetProvider {
         Log.d(TAG, gcal.getTime().toLocaleString());
         gcal.set(Calendar.HOUR_OF_DAY, 0);
         gcal.set(Calendar.MINUTE, 0);
-        gcal.set(Calendar.SECOND, 0);
+        gcal.set(Calendar.SECOND, 1);
         gcal.set(Calendar.MILLISECOND, 0);
         gcal.add(Calendar.DAY_OF_YEAR, 1);
         gcal.getTimeInMillis();
@@ -125,21 +121,20 @@ public class WidgetProvider extends AppWidgetProvider {
     }
 
     public void updateWidget(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds){
+        SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(context);
+
         Log.d(TAG, "updateWidget");
         GregorianCalendar today = new GregorianCalendar();
         Log.d(TAG, "today: " + today.getTime().toLocaleString());
 
         GregorianCalendar ubuntuReleaseDay = (GregorianCalendar) Constants.ubuntuReleaseCal.clone();
-        
+
         Log.d(TAG, "ubuntuReleaseCal: " + ubuntuReleaseDay.getTime().toLocaleString());
-        
-        SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(context);
 
-        long ubuntuReleaseMillis = mPrefs.getLong(context.getString(R.string.pref_custom_date_key), DatePreference.DEFAULT_VALUE);
-
-        ubuntuReleaseDay.setTimeInMillis(ubuntuReleaseMillis);
-
-
+        if(mPrefs.getBoolean(context.getString(R.string.pref_custom_date_checkbox_key), false)){
+            long ubuntuReleaseMillis = mPrefs.getLong(context.getString(R.string.pref_custom_date_key), DatePreference.DEFAULT_VALUE);
+            ubuntuReleaseDay.setTimeInMillis(ubuntuReleaseMillis);
+        }
 
         long millisLeft = ubuntuReleaseDay.getTimeInMillis()-today.getTimeInMillis();
         // Only API Level 9 --> TimeUnit.MILLISECONDS.toHours(millisLeft);

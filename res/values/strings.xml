@@ -52,7 +52,18 @@
 
 	<string
 		name="info">Info</string>
+
 	<!-- Preferences -->
+	<string
+		name="pref_countdown_options">Countdown options</string>
+	<string
+		name="pref_default_release_date">Official Ubuntu release date</string>
+	<string
+		name="pref_custom_date_checkbox">Use a custom date</string>
+	<string
+		name="pref_custom_date_checkbox_summary">Use a custom release date for the countdown</string>
+	<string
+		name="pref_custom_date">Select a custom date</string>
 	<string
 		name="pref_info_version">Version</string>
 	<string
@@ -60,9 +71,9 @@
 	<string
 		name="pref_info_summary">Info, FAQ and Acknowledgements</string>
 	<string
-		name="pref_donate">Support Libretto Universitario</string>
+		name="pref_donate">Buy me a Beer</string>
 	<string
-		name="pref_donate_summary">Help us to keep it free and without ads</string>
+		name="pref_donate_summary">Help me to keep this app free and without ads</string>
 	<string
 		name="pref_report_a_bug">Report a Bug</string>
 	<string

@@ -23,6 +23,7 @@ import com.leinardi.ubuntucountdownwidget.customviews.DatePreference;
 import com.leinardi.ubuntucountdownwidget.misc.Log;
 import com.leinardi.ubuntucountdownwidget.R;
 import com.leinardi.ubuntucountdownwidget.misc.Constants;
+import com.leinardi.ubuntucountdownwidget.utils.Utils;
 
 import android.appwidget.AppWidgetManager;
 import android.content.Intent;
@@ -31,12 +32,12 @@ import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
+
 import android.preference.Preference.OnPreferenceClickListener;
 import android.view.KeyEvent;
 
@@ -67,6 +68,21 @@ public class ConfigActivity extends PreferenceActivity implements OnSharedPrefer
         customDateCheckbox = (CheckBoxPreference) findPreference(getString(R.string.pref_custom_date_checkbox_key));
         customDatePicker = findPreference(getString(R.string.pref_custom_date_key));
 
+        ((CheckBoxPreference)findPreference(getString(R.string.pref_disable_launcher_icon_key)))
+        .setOnPreferenceClickListener(new OnPreferenceClickListener() {
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
+                if(((CheckBoxPreference)preference).isChecked()){
+                    Utils.getInstance().enableComponent(false, ConfigActivity.this, LauncherActivity.class);
+                    Log.d(TAG, "Launcher icon disabled");
+                }else{
+                    Utils.getInstance().enableComponent(true, ConfigActivity.this, LauncherActivity.class);
+                    Log.d(TAG, "Launcher icon enabled");
+                }
+                return true;
+            }
+        });
+        
         String version;
         try {
             PackageInfo pi = getPackageManager().getPackageInfo(getPackageName(), 0);
@@ -133,6 +149,7 @@ public class ConfigActivity extends PreferenceActivity implements OnSharedPrefer
                 && event.getRepeatCount() == 0) {
             // Take care of calling this method on earlier versions of
             // the platform where it doesn't exist.
+            Log.d(TAG, "SDK < Eclair");
             onBackPressed();
         }
 
@@ -144,7 +161,7 @@ public class ConfigActivity extends PreferenceActivity implements OnSharedPrefer
         // This will be called either automatically for you on 2.0
         // or later, or by the code above on earlier versions of the
         // platform.
-        
+        Log.d(TAG, "onBackPressed");
         resultIntent();
         finish();
         return;
@@ -164,5 +181,4 @@ public class ConfigActivity extends PreferenceActivity implements OnSharedPrefer
             }
         }
     }
-
 }

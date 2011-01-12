@@ -7,8 +7,10 @@ import java.io.InputStreamReader;
 import com.leinardi.ubuntucountdownwidget.R;
 import com.leinardi.ubuntucountdownwidget.misc.Log;
 
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.view.View;
 import android.webkit.WebView;
@@ -66,5 +68,13 @@ public class Utils {
                 Uri.parse("market://search?q=Donation%20pub:%22Roberto%20Leinardi%22") );
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         mContext.startActivity(intent);
+    }
+    
+    public void enableComponent(boolean enable, Context mContext, Class<?> class1) {
+        ComponentName componentName = new ComponentName(mContext, class1);
+        mContext.getPackageManager().setComponentEnabledSetting(
+                componentName,
+                enable ? PackageManager.COMPONENT_ENABLED_STATE_ENABLED : PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
+                        PackageManager.DONT_KILL_APP);
     }
 }

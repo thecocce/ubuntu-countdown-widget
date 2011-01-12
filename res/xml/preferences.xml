@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 	<!--
-		Libretto Universitario Copyright (C) 2010 Roberto Leinardi This
+		Ubuntu Countdown Widget Copyright (C) 2011 Roberto Leinardi This
 		program is free software: you can redistribute it and/or modify it
 		under the terms of the GNU General Public License as published by the
 		Free Software Foundation, either version 3 of the License, or (at your
@@ -16,21 +16,28 @@
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:app="http://schemas.android.com/apk/res/com.leinardi.ubuntucountdownwidget">
 	<PreferenceCategory
-		android:title="@string/info">
+		android:title="@string/pref_countdown_options">
 		<Preference
 			android:key="@string/pref_default_release_date_key"
 			style="?android:preferenceInformationStyle"
-			android:title="default_release_date" />
+			android:title="@string/pref_default_release_date" />
 		<CheckBoxPreference
 			android:key="@string/pref_custom_date_checkbox_key"
-			android:title="use_custom_date"
-			android:summary="summary"
+			android:title="@string/pref_custom_date_checkbox"
+			android:summary="@string/pref_custom_date_checkbox_summary"
 			android:defaultValue="false" />
 		<com.leinardi.ubuntucountdownwidget.customviews.DatePreference
 			android:key="@string/pref_custom_date_key"
 			android:dependency="@string/pref_custom_date_checkbox_key"
-			android:title="custom_date"
-			android:summary="summary" />
+			android:title="@string/pref_custom_date" />
+	</PreferenceCategory>
+	<PreferenceCategory
+		android:title="launcher_options">
+		<CheckBoxPreference
+			android:key="@string/pref_disable_launcher_icon_key"
+			android:title="hide_launcher_icon"
+			android:summary="need_launcher_restart"
+			android:defaultValue="false" />
 	</PreferenceCategory>
 	<PreferenceCategory
 		android:title="@string/info">
@@ -38,20 +45,10 @@
 			android:key="@string/pref_info_version_key"
 			style="?android:preferenceInformationStyle"
 			android:title="@string/pref_info_version" />
-		<com.leinardi.ubuntucountdownwidget.customviews.DonateDialogPreference
-			app:fileName="@string/changelog_filename"
-			android:key="@string/pref_donate_key"
-			android:title="@string/pref_donate"
-			android:summary="@string/pref_donate_summary"
-			android:dialogIcon="@drawable/ic_dialog_beer"
-			android:dialogTitle="@string/pref_donate"
-			android:dialogMessage="@string/donate_message"
-			android:positiveButtonText="@string/yes"
-			android:negativeButtonText="@string/no" />
-<!--		<Preference-->
-<!--			android:key="@string/pref_info_key"-->
-<!--			android:title="@string/info"-->
-<!--			android:summary="@string/pref_info_summary" />-->
+		<!--		<Preference-->
+		<!--			android:key="@string/pref_info_key"-->
+		<!--			android:title="@string/info"-->
+		<!--			android:summary="@string/pref_info_summary" />-->
 		<Preference
 			android:key="@string/pref_report_a_bug_key"
 			android:title="@string/pref_report_a_bug"
@@ -72,7 +69,17 @@
 			android:dialogIcon="@drawable/ic_dialog_agenda"
 			android:dialogTitle="@string/eula_title"
 			android:negativeButtonText="@null" />
+		<com.leinardi.ubuntucountdownwidget.customviews.DonateDialogPreference
+			app:fileName="@string/changelog_filename"
+			android:key="@string/pref_donate_key"
+			android:title="@string/pref_donate"
+			android:summary="@string/pref_donate_summary"
+			android:dialogIcon="@drawable/ic_dialog_beer"
+			android:dialogTitle="@string/pref_donate"
+			android:dialogMessage="@string/donate_message"
+			android:positiveButtonText="@string/yes"
+			android:negativeButtonText="@string/no" />
 	</PreferenceCategory>
-	
+
 </PreferenceScreen>
 
