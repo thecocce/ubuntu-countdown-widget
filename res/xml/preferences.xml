@@ -32,11 +32,11 @@
 			android:title="@string/pref_custom_date" />
 	</PreferenceCategory>
 	<PreferenceCategory
-		android:title="launcher_options">
+		android:title="@string/pref_launcher_options">
 		<CheckBoxPreference
 			android:key="@string/pref_disable_launcher_icon_key"
-			android:title="hide_launcher_icon"
-			android:summary="need_launcher_restart"
+			android:title="@string/pref_disable_launcher_icon"
+			android:summary="@string/pref_disable_launcher_icon_summary"
 			android:defaultValue="false" />
 	</PreferenceCategory>
 	<PreferenceCategory

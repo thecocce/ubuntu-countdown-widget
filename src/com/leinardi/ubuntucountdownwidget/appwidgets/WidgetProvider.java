@@ -50,7 +50,6 @@ import java.util.Calendar;
 
 import java.util.GregorianCalendar;
 
-
 public class WidgetProvider extends AppWidgetProvider {
     private static final String TAG="WidgetProvider";
 
@@ -78,10 +77,7 @@ public class WidgetProvider extends AppWidgetProvider {
         Log.d(TAG, gcal.getTime().toLocaleString());
 
         alarmManager.cancel(pi);
-        alarmManager.setRepeating(AlarmManager.RTC,
-                gcal.getTimeInMillis(),
-                AlarmManager.INTERVAL_DAY,
-                pi);
+        alarmManager.setRepeating(AlarmManager.RTC, gcal.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pi);
 
         updateWidget(context);
         super.onUpdate(context, appWidgetManager, appWidgetIds);
@@ -172,10 +168,11 @@ public class WidgetProvider extends AppWidgetProvider {
                 views.setViewVisibility(R.id.tv_counter, View.VISIBLE);
                 views.setTextViewText(R.id.tv_footer, context.getString(R.string.days_left));
             }else if(millisLeft<0){
+                String releaseNumber = String.format("%02d.%02d", ubuntuReleaseDay.getTime().getYear() - 100, ubuntuReleaseDay.getTime().getMonth() + 1);
                 views.setViewVisibility(R.id.iv_header, View.VISIBLE);
                 views.setViewVisibility(R.id.iv_logo, View.GONE);
                 views.setViewVisibility(R.id.tv_counter, View.GONE);
-                views.setTextViewText(R.id.tv_release_big, context.getString(R.string.release_number));
+                views.setTextViewText(R.id.tv_release_big, releaseNumber);
                 views.setViewVisibility(R.id.tv_release_big, View.VISIBLE);
                 views.setTextViewText(R.id.tv_footer, context.getString(R.string.its_here));
             }else{
