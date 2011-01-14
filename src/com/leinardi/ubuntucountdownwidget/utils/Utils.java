@@ -3,6 +3,9 @@ package com.leinardi.ubuntucountdownwidget.utils;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.TimeZone;
 
 import com.leinardi.ubuntucountdownwidget.R;
 import com.leinardi.ubuntucountdownwidget.misc.Log;
@@ -76,5 +79,11 @@ public class Utils {
                 componentName,
                 enable ? PackageManager.COMPONENT_ENABLED_STATE_ENABLED : PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
                         PackageManager.DONT_KILL_APP);
+    }
+
+    public GregorianCalendar getUbuntuReleseDate() {
+        GregorianCalendar ubuntuReleaseDate = new GregorianCalendar(TimeZone.getTimeZone("GMT"));
+        ubuntuReleaseDate.set(2011, Calendar.APRIL, 28, 0, 0, 0);
+        return (GregorianCalendar)ubuntuReleaseDate.clone();
     }
 }

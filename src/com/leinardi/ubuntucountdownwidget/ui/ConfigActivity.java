@@ -62,7 +62,7 @@ public class ConfigActivity extends PreferenceActivity implements OnSharedPrefer
         mPrefs = PreferenceManager.getDefaultSharedPreferences(this);
 
         String releaseDate = DateFormat.getDateInstance(DateFormat.LONG,
-                Locale.getDefault()).format(Constants.ubuntuReleaseCal.getTime());
+                Locale.getDefault()).format(Utils.getInstance().getUbuntuReleseDate().getTime());
         findPreference(getString(R.string.pref_default_release_date_key)).setSummary(releaseDate);
 
         customDateCheckbox = (CheckBoxPreference) findPreference(getString(R.string.pref_custom_date_checkbox_key));
@@ -111,7 +111,7 @@ public class ConfigActivity extends PreferenceActivity implements OnSharedPrefer
 
         if(!customDateCheckbox.isChecked()){
             mPrefs.edit().putLong(getString(R.string.pref_custom_date_key),
-                    Constants.ubuntuReleaseCal.getTimeInMillis()).commit();
+                    Utils.getInstance().getUbuntuReleseDate().getTimeInMillis()).commit();
         }
         // Setup the initial values
         long dateInMillis = mPrefs.getLong(getString(R.string.pref_custom_date_key),
@@ -168,7 +168,6 @@ public class ConfigActivity extends PreferenceActivity implements OnSharedPrefer
     }
 
     private void resultIntent() {
-        sendBroadcast(new Intent(Constants.FORCE_WIDGET_UPDATE));
         if (CONFIGURE_ACTION.equals(getIntent().getAction())) {
             Intent intent=getIntent();
             Bundle extras=intent.getExtras();
@@ -179,6 +178,8 @@ public class ConfigActivity extends PreferenceActivity implements OnSharedPrefer
                 result.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
                 setResult(RESULT_OK, result);
             }
+        }else{
+            sendBroadcast(new Intent(Constants.FORCE_WIDGET_UPDATE));
         }
     }
 }

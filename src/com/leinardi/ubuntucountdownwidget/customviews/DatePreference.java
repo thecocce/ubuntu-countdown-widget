@@ -19,8 +19,8 @@
 
 package com.leinardi.ubuntucountdownwidget.customviews;
 
-import com.leinardi.ubuntucountdownwidget.misc.Constants;
 import com.leinardi.ubuntucountdownwidget.misc.Log;
+import com.leinardi.ubuntucountdownwidget.utils.Utils;
 
 import java.util.Calendar;
 
@@ -39,7 +39,7 @@ DatePicker.OnDateChangedListener {
     /** Tag for output. */
     private static final String TAG = "DatePreference";
     /** Global default value. */
-    public static final long DEFAULT_VALUE = Constants.ubuntuReleaseCal.getTimeInMillis();
+    public static final long DEFAULT_VALUE = Utils.getInstance().getUbuntuReleseDate().getTimeInMillis();
     /** Default value. */
     private long defValue = DEFAULT_VALUE;
 

@@ -20,6 +20,7 @@
 /*
  * TODO
  * 
+ * Fix the Gregorian ugly workaround
  * Support for ldpi (QVGA)
  * Do a better translation
  * Add italian localization
@@ -32,6 +33,7 @@ import com.leinardi.ubuntucountdownwidget.R;
 import com.leinardi.ubuntucountdownwidget.customviews.DatePreference;
 import com.leinardi.ubuntucountdownwidget.misc.Constants;
 import com.leinardi.ubuntucountdownwidget.misc.Log;
+import com.leinardi.ubuntucountdownwidget.utils.Utils;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
@@ -47,6 +49,7 @@ import android.view.View;
 import android.widget.RemoteViews;
 
 import java.util.Calendar;
+import java.util.TimeZone;
 
 import java.util.GregorianCalendar;
 
@@ -61,23 +64,29 @@ public class WidgetProvider extends AppWidgetProvider {
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager,int[] appWidgetIds) {
         Log.d(TAG, "onUpdate");
-
+        
+        
+        // Setting the AlarmManager to fire an Intent at next midnight
         AlarmManager alarmManager = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
 
         PendingIntent pi = PendingIntent.getBroadcast(context, 0, new Intent(Constants.FORCE_WIDGET_UPDATE), 0);
 
-        GregorianCalendar gcal = new GregorianCalendar();
-        Log.d(TAG, gcal.getTime().toLocaleString());
-        gcal.set(Calendar.HOUR_OF_DAY, 0);
-        gcal.set(Calendar.MINUTE, 0);
-        gcal.set(Calendar.SECOND, 1);
-        gcal.set(Calendar.MILLISECOND, 0);
-        gcal.add(Calendar.DAY_OF_YEAR, 1);
-        gcal.getTimeInMillis();
-        Log.d(TAG, gcal.getTime().toLocaleString());
+        GregorianCalendar now = new GregorianCalendar(TimeZone.getTimeZone("GMT"));
+        GregorianCalendar triggerCalendar = (GregorianCalendar)now.clone();
+        Log.d(TAG, "gcal: " + triggerCalendar.getTime().toString());
+        triggerCalendar.set(Calendar.HOUR_OF_DAY, 1); // ugly workaround
+        triggerCalendar.set(Calendar.MINUTE, 0);
+        triggerCalendar.set(Calendar.SECOND, 1);
+        triggerCalendar.set(Calendar.MILLISECOND, 0);
+        if(triggerCalendar.before(now)){
+            triggerCalendar.add(Calendar.DAY_OF_YEAR, 1);    
+        }
+        
+        triggerCalendar.getTimeInMillis();
+        Log.d(TAG, "AlarmManager next update: " + triggerCalendar.getTime().toString());
 
         alarmManager.cancel(pi);
-        alarmManager.setRepeating(AlarmManager.RTC, gcal.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pi);
+        alarmManager.setRepeating(AlarmManager.RTC, triggerCalendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pi);
 
         updateWidget(context);
         super.onUpdate(context, appWidgetManager, appWidgetIds);
@@ -120,12 +129,13 @@ public class WidgetProvider extends AppWidgetProvider {
         SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(context);
 
         Log.d(TAG, "updateWidget");
-        GregorianCalendar today = new GregorianCalendar();
-        Log.d(TAG, "today: " + today.getTime().toLocaleString());
+        GregorianCalendar today = new GregorianCalendar(TimeZone.getTimeZone("GMT"));
+        Log.d(TAG, "today: " + today.getTime().toString());
 
-        GregorianCalendar ubuntuReleaseDay = (GregorianCalendar) Constants.ubuntuReleaseCal.clone();
+        GregorianCalendar ubuntuReleaseDay = Utils.getInstance().getUbuntuReleseDate();
+        ubuntuReleaseDay. setTimeZone(TimeZone.getTimeZone("GMT"));
 
-        Log.d(TAG, "ubuntuReleaseCal: " + ubuntuReleaseDay.getTime().toLocaleString());
+        Log.d(TAG, "ubuntuReleaseCal: " + ubuntuReleaseDay.getTime().toString());
 
         if(mPrefs.getBoolean(context.getString(R.string.pref_custom_date_checkbox_key), false)){
             long ubuntuReleaseMillis = mPrefs.getLong(context.getString(R.string.pref_custom_date_key), DatePreference.DEFAULT_VALUE);
@@ -134,7 +144,7 @@ public class WidgetProvider extends AppWidgetProvider {
 
         long millisLeft = ubuntuReleaseDay.getTimeInMillis()-today.getTimeInMillis();
         // Only API Level 9 --> TimeUnit.MILLISECONDS.toHours(millisLeft);
-        long hoursLeft = millisLeft / (1000 * 60 * 60); 
+        long hoursLeft = (long) Math.ceil(millisLeft / (1000 * 60 * 60.0)); 
 
         long daysLeft = (long) Math.ceil(hoursLeft/24.0);
 
