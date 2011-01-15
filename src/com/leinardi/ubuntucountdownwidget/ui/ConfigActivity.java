@@ -68,21 +68,21 @@ public class ConfigActivity extends PreferenceActivity implements OnSharedPrefer
         customDateCheckbox = (CheckBoxPreference) findPreference(getString(R.string.pref_custom_date_checkbox_key));
         customDatePicker = findPreference(getString(R.string.pref_custom_date_key));
 
-        ((CheckBoxPreference)findPreference(getString(R.string.pref_disable_launcher_icon_key)))
+        ((CheckBoxPreference)findPreference(getString(R.string.pref_show_launcher_icon_key)))
         .setOnPreferenceClickListener(new OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(Preference preference) {
                 if(((CheckBoxPreference)preference).isChecked()){
-                    Utils.getInstance().enableComponent(false, ConfigActivity.this, LauncherActivity.class);
-                    Log.d(TAG, "Launcher icon disabled");
-                }else{
                     Utils.getInstance().enableComponent(true, ConfigActivity.this, LauncherActivity.class);
                     Log.d(TAG, "Launcher icon enabled");
+                }else{
+                    Utils.getInstance().enableComponent(false, ConfigActivity.this, LauncherActivity.class);
+                    Log.d(TAG, "Launcher icon disabled");
                 }
                 return true;
             }
         });
-        
+
         String version;
         try {
             PackageInfo pi = getPackageManager().getPackageInfo(getPackageName(), 0);

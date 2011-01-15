@@ -65,16 +65,14 @@ public class WidgetProvider extends AppWidgetProvider {
     public void onUpdate(Context context, AppWidgetManager appWidgetManager,int[] appWidgetIds) {
         Log.d(TAG, "onUpdate");
         
-        
-        // Setting the AlarmManager to fire an Intent at next midnight
         AlarmManager alarmManager = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
 
         PendingIntent pi = PendingIntent.getBroadcast(context, 0, new Intent(Constants.FORCE_WIDGET_UPDATE), 0);
 
-        GregorianCalendar now = new GregorianCalendar(TimeZone.getTimeZone("GMT"));
+        GregorianCalendar now = new GregorianCalendar(TimeZone.getTimeZone("UTC"));
         GregorianCalendar triggerCalendar = (GregorianCalendar)now.clone();
         Log.d(TAG, "gcal: " + triggerCalendar.getTime().toString());
-        triggerCalendar.set(Calendar.HOUR_OF_DAY, 1); // ugly workaround
+        triggerCalendar.set(Calendar.HOUR_OF_DAY, 1);
         triggerCalendar.set(Calendar.MINUTE, 0);
         triggerCalendar.set(Calendar.SECOND, 1);
         triggerCalendar.set(Calendar.MILLISECOND, 0);
@@ -86,7 +84,7 @@ public class WidgetProvider extends AppWidgetProvider {
         Log.d(TAG, "AlarmManager next update: " + triggerCalendar.getTime().toString());
 
         alarmManager.cancel(pi);
-        alarmManager.setRepeating(AlarmManager.RTC, triggerCalendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pi);
+        alarmManager.setRepeating(AlarmManager.RTC, triggerCalendar.getTimeInMillis(), AlarmManager.INTERVAL_HALF_DAY, pi);
 
         updateWidget(context);
         super.onUpdate(context, appWidgetManager, appWidgetIds);
@@ -133,7 +131,6 @@ public class WidgetProvider extends AppWidgetProvider {
         Log.d(TAG, "today: " + today.getTime().toString());
 
         GregorianCalendar ubuntuReleaseDay = Utils.getInstance().getUbuntuReleseDate();
-        ubuntuReleaseDay. setTimeZone(TimeZone.getTimeZone("GMT"));
 
         Log.d(TAG, "ubuntuReleaseCal: " + ubuntuReleaseDay.getTime().toString());
 
@@ -142,7 +139,8 @@ public class WidgetProvider extends AppWidgetProvider {
             ubuntuReleaseDay.setTimeInMillis(ubuntuReleaseMillis);
         }
 
-        long millisLeft = ubuntuReleaseDay.getTimeInMillis()-today.getTimeInMillis();
+        long millisLeft = ubuntuReleaseDay.getTimeInMillis() - today.getTimeInMillis();
+
         // Only API Level 9 --> TimeUnit.MILLISECONDS.toHours(millisLeft);
         long hoursLeft = (long) Math.ceil(millisLeft / (1000 * 60 * 60.0)); 
 
@@ -170,7 +168,7 @@ public class WidgetProvider extends AppWidgetProvider {
             views.setViewVisibility(R.id.progress_bar, View.GONE);
             views.setViewVisibility(R.id.tv_footer, View.VISIBLE);
 
-            if(millisLeft > DateUtils.DAY_IN_MILLIS){
+            if(millisLeft > DateUtils.DAY_IN_MILLIS / 2 ){
                 views.setViewVisibility(R.id.iv_header, View.VISIBLE);
                 views.setViewVisibility(R.id.tv_release_big, View.GONE);
                 views.setViewVisibility(R.id.iv_logo, View.GONE);

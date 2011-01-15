@@ -19,6 +19,7 @@ import android.view.View;
 import android.webkit.WebView;
 
 public class Utils {
+    private final static String TAG = "Utils";
     private static final Utils INSTANCE = new Utils();
 
     // Private constructor prevents instantiation from other classes
@@ -84,6 +85,8 @@ public class Utils {
     public GregorianCalendar getUbuntuReleseDate() {
         GregorianCalendar ubuntuReleaseDate = new GregorianCalendar(TimeZone.getTimeZone("GMT"));
         ubuntuReleaseDate.set(2011, Calendar.APRIL, 28, 0, 0, 0);
+        Log.d(TAG, "Utils.ubuntuReleaseDate: " + ubuntuReleaseDate.getTime().toString());
+        
         return (GregorianCalendar)ubuntuReleaseDate.clone();
     }
 }

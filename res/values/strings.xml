@@ -36,6 +36,10 @@
 	<string
 		name="next">Next</string>
 	<string
+		name="settings">Settings</string>
+	<string
+		name="exit">Exit</string>
+	<string
 		name="default_text">Default</string>
 
 	<!-- Eula -->
@@ -65,9 +69,14 @@
 	<string
 		name="pref_launcher_options">Launcher Options</string>
 	<string
-		name="pref_disable_launcher_icon">Hide Launcher icon</string>
+		name="pref_show_launcher_icon">Show Launcher icon</string>
 	<string
-		name="pref_disable_launcher_icon_summary">Hide the widget icon from the launcher\n(Restart needed)</string>
+		name="pref_show_launcher_icon_summary">If unchecked hide the widget icon from the launcher\n(Restart
+		needed)</string>
+	<string
+		name="pref_display_tutorial">Display Tutorial</string>
+	<string
+		name="pref_display_tutorial_summary">pref_display_tutorial_summary</string>
 	<string
 		name="pref_info_version">Version</string>
 	<string
@@ -77,7 +86,7 @@
 	<string
 		name="pref_donate">Buy me a Beer</string>
 	<string
-		name="pref_donate_summary">Help me to keep this app free and without ads</string>
+		name="pref_donate_summary">Help me to keep my apps free and without ads</string>
 	<string
 		name="pref_report_a_bug">Report a Bug</string>
 	<string

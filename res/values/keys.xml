@@ -20,7 +20,9 @@
 	<string
 		name="pref_default_release_date_key">pref_default_release_date</string>
 	<string
-		name="pref_disable_launcher_icon_key">pref_disable_launcher_icon</string>
+		name="pref_show_launcher_icon_key">pref_show_launcher_icon</string>
+	<string
+		name="pref_display_tutorial_key">pref_show_tutorial</string>
 	<string
 		name="pref_info_version_key">pref_info_version</string>
 	<string
