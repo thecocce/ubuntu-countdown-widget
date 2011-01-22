@@ -119,7 +119,7 @@ DatePicker.OnDateChangedListener {
     public void onDateChanged(final DatePicker view, final int year,
             final int monthOfYear, final int dayOfMonth) {
         Calendar c = Calendar.getInstance();
-        c.set(year, monthOfYear, dayOfMonth);
+        c.set(year, monthOfYear, dayOfMonth, 0, 0, 0);
         this.persistLong(c.getTimeInMillis());
     }
 

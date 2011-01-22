@@ -65,27 +65,7 @@ public class WidgetProvider extends AppWidgetProvider {
     public void onUpdate(Context context, AppWidgetManager appWidgetManager,int[] appWidgetIds) {
         Log.d(TAG, "onUpdate");
         
-        AlarmManager alarmManager = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
-
-        PendingIntent pi = PendingIntent.getBroadcast(context, 0, new Intent(Constants.FORCE_WIDGET_UPDATE), 0);
-
-        GregorianCalendar now = new GregorianCalendar(TimeZone.getTimeZone("UTC"));
-        GregorianCalendar triggerCalendar = (GregorianCalendar)now.clone();
-        Log.d(TAG, "gcal: " + triggerCalendar.getTime().toString());
-        triggerCalendar.set(Calendar.HOUR_OF_DAY, 1);
-        triggerCalendar.set(Calendar.MINUTE, 0);
-        triggerCalendar.set(Calendar.SECOND, 1);
-        triggerCalendar.set(Calendar.MILLISECOND, 0);
-        if(triggerCalendar.before(now)){
-            triggerCalendar.add(Calendar.DAY_OF_YEAR, 1);    
-        }
-        
-        triggerCalendar.getTimeInMillis();
-        Log.d(TAG, "AlarmManager next update: " + triggerCalendar.getTime().toString());
-
-        alarmManager.cancel(pi);
-        alarmManager.setRepeating(AlarmManager.RTC, triggerCalendar.getTimeInMillis(), AlarmManager.INTERVAL_HALF_DAY, pi);
-
+       
         updateWidget(context);
         super.onUpdate(context, appWidgetManager, appWidgetIds);
     }
@@ -131,13 +111,15 @@ public class WidgetProvider extends AppWidgetProvider {
         Log.d(TAG, "today: " + today.getTime().toString());
 
         GregorianCalendar ubuntuReleaseDay = Utils.getInstance().getUbuntuReleseDate();
-
         Log.d(TAG, "ubuntuReleaseCal: " + ubuntuReleaseDay.getTime().toString());
 
         if(mPrefs.getBoolean(context.getString(R.string.pref_custom_date_checkbox_key), false)){
             long ubuntuReleaseMillis = mPrefs.getLong(context.getString(R.string.pref_custom_date_key), DatePreference.DEFAULT_VALUE);
             ubuntuReleaseDay.setTimeInMillis(ubuntuReleaseMillis);
         }
+        Log.d(TAG, "ubuntuReleaseCal: " + ubuntuReleaseDay.getTime().toString());
+        
+        setAlarmManager(context, ubuntuReleaseDay);
 
         long millisLeft = ubuntuReleaseDay.getTimeInMillis() - today.getTimeInMillis();
 
@@ -193,6 +175,34 @@ public class WidgetProvider extends AppWidgetProvider {
 
             appWidgetManager.updateAppWidget(appWidgetId, views);
         }
+    }
+
+    private void setAlarmManager(Context context, GregorianCalendar ubuntuReleaseDay) {
+        AlarmManager alarmManager = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
+
+        PendingIntent pi = PendingIntent.getBroadcast(context, 0, new Intent(Constants.FORCE_WIDGET_UPDATE), 0);
+        
+        GregorianCalendar now = new GregorianCalendar(TimeZone.getDefault());
+        GregorianCalendar triggerCalendar = (GregorianCalendar)now.clone();
+        Log.d(TAG, "gcal: " + triggerCalendar.getTime().toString());
+        
+        Log.d(TAG, "getHours: " + ubuntuReleaseDay.getTime().getHours());
+        Log.d(TAG, "getMinutes: " + ubuntuReleaseDay.getTime().getMinutes());
+        Log.d(TAG, "getSeconds: " + ubuntuReleaseDay.getTime().getSeconds());
+        
+        triggerCalendar.set(Calendar.HOUR_OF_DAY, ubuntuReleaseDay.getTime().getHours());
+        triggerCalendar.set(Calendar.MINUTE, ubuntuReleaseDay.getTime().getMinutes());
+        triggerCalendar.set(Calendar.SECOND, ubuntuReleaseDay.getTime().getSeconds() + 1);
+        triggerCalendar.set(Calendar.MILLISECOND, 0);
+        if(triggerCalendar.before(now)){
+            triggerCalendar.add(Calendar.DAY_OF_YEAR, 1);    
+        }
+        
+        triggerCalendar.getTimeInMillis();
+        Log.d(TAG, "AlarmManager next update: " + triggerCalendar.getTime().toString());
+
+        alarmManager.cancel(pi);
+        alarmManager.setRepeating(AlarmManager.RTC, triggerCalendar.getTimeInMillis(), AlarmManager.INTERVAL_HALF_DAY, pi);
     }
 
     @Override

@@ -178,8 +178,7 @@ public class ConfigActivity extends PreferenceActivity implements OnSharedPrefer
                 result.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
                 setResult(RESULT_OK, result);
             }
-        }else{
-            sendBroadcast(new Intent(Constants.FORCE_WIDGET_UPDATE));
         }
+        sendBroadcast(new Intent(Constants.FORCE_WIDGET_UPDATE));
     }
 }
