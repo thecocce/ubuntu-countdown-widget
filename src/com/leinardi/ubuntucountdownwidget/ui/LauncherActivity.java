@@ -24,7 +24,7 @@ public class LauncherActivity extends Activity {
         
         mPrefs = PreferenceManager.getDefaultSharedPreferences(this);
         
-        if(!mPrefs.getBoolean(getString(R.string.pref_display_tutorial_key), true)){
+        if(!mPrefs.getBoolean(getString(R.string.pref_show_tutorial_key), true)){
             startConfigActivity();
         }
 

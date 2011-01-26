@@ -39,10 +39,10 @@
 			android:summary="@string/pref_show_launcher_icon_summary"
 			android:defaultValue="true" />
 		<CheckBoxPreference
-			android:key="@string/pref_display_tutorial_key"
+			android:key="@string/pref_show_tutorial_key"
 			android:dependency="@string/pref_show_launcher_icon_key"
-			android:title="@string/pref_display_tutorial"
-			android:summary="@string/pref_display_tutorial_summary"
+			android:title="@string/pref_show_tutorial"
+			android:summary="@string/pref_show_tutorial_summary"
 			android:defaultValue="true" />
 	</PreferenceCategory>
 	<PreferenceCategory

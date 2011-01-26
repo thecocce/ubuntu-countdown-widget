@@ -11,28 +11,13 @@
 		should have received a copy of the GNU General Public License along
 		with this program. If not, see <http://www.gnu.org/licenses/>.
 	-->
-
+	
 <resources>
 	<string
-		name="pref_custom_date_checkbox_key">pref_custom_date_checkbox</string>
-	<string
-		name="pref_custom_date_key">pref_custom_date</string>
-	<string
-		name="pref_default_release_date_key">pref_default_release_date</string>
-	<string
-		name="pref_show_launcher_icon_key">pref_show_launcher_icon</string>
-	<string
-		name="pref_show_tutorial_key">pref_show_tutorial</string>
-	<string
-		name="pref_info_version_key">pref_info_version</string>
-	<string
-		name="pref_info_key">pref_info</string>
-	<string
-		name="pref_donate_key">pref_donate</string>
-	<string
-		name="pref_report_a_bug_key">pref_report_a_bug</string>
-	<string
-		name="pref_changelog_key">pref_changelog</string>
-	<string
-		name="pref_eula_key">pref_eula</string>
+		name="donate_message">Ubuntu Countdown Widget è gratuita, open source e priva di pubblicità.
+		Supportala facendo una piccola donazione.\n\nGrazie al tuo aiuto sarà
+		possibile testare l\'applicazione su un numero maggiore di terminali e
+		consentirà allo sviluppatore di continuare il suo lavoro.\n\nDonare è
+		semplice: premendo il pulsante \"Sì\" verrai reindirizzato sul Market dove
+		potrai acquistare una delle applicazioni Donate.</string>
 </resources>
