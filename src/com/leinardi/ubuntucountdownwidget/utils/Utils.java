@@ -85,7 +85,6 @@ public class Utils {
     public GregorianCalendar getUbuntuReleseDate() {
         GregorianCalendar ubuntuReleaseDate = new GregorianCalendar(TimeZone.getTimeZone("GMT"));
         ubuntuReleaseDate.set(2011, Calendar.APRIL, 28, 0, 0, 0);
-        Log.d(TAG, "Utils.ubuntuReleaseDate: " + ubuntuReleaseDate.getTime().toString());
         
         return (GregorianCalendar)ubuntuReleaseDate.clone();
     }

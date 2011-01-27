@@ -74,10 +74,10 @@ public class ConfigActivity extends PreferenceActivity implements OnSharedPrefer
             public boolean onPreferenceClick(Preference preference) {
                 if(((CheckBoxPreference)preference).isChecked()){
                     Utils.getInstance().enableComponent(true, ConfigActivity.this, LauncherActivity.class);
-                    Log.d(TAG, "Launcher icon enabled");
+                    //Log.d(TAG, "Launcher icon enabled");
                 }else{
                     Utils.getInstance().enableComponent(false, ConfigActivity.this, LauncherActivity.class);
-                    Log.d(TAG, "Launcher icon disabled");
+                    //Log.d(TAG, "Launcher icon disabled");
                 }
                 return true;
             }
@@ -149,7 +149,7 @@ public class ConfigActivity extends PreferenceActivity implements OnSharedPrefer
                 && event.getRepeatCount() == 0) {
             // Take care of calling this method on earlier versions of
             // the platform where it doesn't exist.
-            Log.d(TAG, "SDK < Eclair");
+            //Log.d(TAG, "SDK < Eclair");
             onBackPressed();
         }
 
@@ -161,7 +161,7 @@ public class ConfigActivity extends PreferenceActivity implements OnSharedPrefer
         // This will be called either automatically for you on 2.0
         // or later, or by the code above on earlier versions of the
         // platform.
-        Log.d(TAG, "onBackPressed");
+        //Log.d(TAG, "onBackPressed");
         resultIntent();
         finish();
         return;

@@ -20,10 +20,7 @@
 /*
  * TODO
  * 
- * Fix the Gregorian ugly workaround
  * Support for ldpi (QVGA)
- * Do a better translation
- * Add italian localization
  * 
  */
 
@@ -63,9 +60,7 @@ public class WidgetProvider extends AppWidgetProvider {
 
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager,int[] appWidgetIds) {
-        Log.d(TAG, "onUpdate");
-        
-       
+        //Log.d(TAG, "onUpdate");
         updateWidget(context);
         super.onUpdate(context, appWidgetManager, appWidgetIds);
     }
@@ -78,7 +73,7 @@ public class WidgetProvider extends AppWidgetProvider {
                 action.equals(Intent.ACTION_TIMEZONE_CHANGED)||
                 //action.equals(Intent.ACTION_DATE_CHANGED) ||
                 action.equals(Intent.ACTION_TIME_CHANGED)){
-            Log.d(TAG,"broadcast "+ action +" catched!");
+            //Log.d(TAG,"broadcast "+ action +" catched!");
             updateWidget(context);
         }
 
@@ -89,10 +84,10 @@ public class WidgetProvider extends AppWidgetProvider {
         ComponentName thisWidget=null;
         if(this instanceof Widget1x1Provider){
             thisWidget = new ComponentName(context, Widget1x1Provider.class); 
-            Log.d(TAG, "instanceof Widget1x1Provider");
+            //Log.d(TAG, "instanceof Widget1x1Provider");
         }else if(this instanceof Widget2x2Provider){
             thisWidget = new ComponentName(context, Widget2x2Provider.class);
-            Log.d(TAG, "instanceof Widget2x2Provider");
+            //Log.d(TAG, "instanceof Widget2x2Provider");
         }else{
             // TODO Write a better log message
             Log.e(TAG, "instanceof ERROR !!!");
@@ -104,49 +99,39 @@ public class WidgetProvider extends AppWidgetProvider {
     }
 
     public void updateWidget(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds){
+//        Log.d(TAG, "updateWidget");
+
         SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(context);
-
-        Log.d(TAG, "updateWidget");
+       
         GregorianCalendar today = new GregorianCalendar(TimeZone.getTimeZone("GMT"));
-        Log.d(TAG, "today: " + today.getTime().toString());
-
         GregorianCalendar ubuntuReleaseDay = Utils.getInstance().getUbuntuReleseDate();
-        Log.d(TAG, "ubuntuReleaseCal: " + ubuntuReleaseDay.getTime().toString());
 
         if(mPrefs.getBoolean(context.getString(R.string.pref_custom_date_checkbox_key), false)){
             long ubuntuReleaseMillis = mPrefs.getLong(context.getString(R.string.pref_custom_date_key), DatePreference.DEFAULT_VALUE);
             ubuntuReleaseDay.setTimeInMillis(ubuntuReleaseMillis);
         }
-        Log.d(TAG, "ubuntuReleaseCal: " + ubuntuReleaseDay.getTime().toString());
-        
+
         setAlarmManager(context, ubuntuReleaseDay);
 
         long millisLeft = ubuntuReleaseDay.getTimeInMillis() - today.getTimeInMillis();
-
         // Only API Level 9 --> TimeUnit.MILLISECONDS.toHours(millisLeft);
         long hoursLeft = (long) Math.ceil(millisLeft / (1000 * 60 * 60.0)); 
-
         long daysLeft = (long) Math.ceil(hoursLeft/24.0);
-
-        Log.d(TAG, "millisLeft: " + millisLeft);
-        Log.d(TAG, "hoursLeft: " + hoursLeft);
-        Log.d(TAG, "daysLeft: " + daysLeft);
 
         RemoteViews views=null;
 
         if(this instanceof Widget1x1Provider){
             views=new RemoteViews(context.getPackageName(), R.layout.appwidget_1x1);   
-            Log.d(TAG, "instanceof Widget1x1Provider");
+            //Log.d(TAG, "instanceof Widget1x1Provider");
         }else if(this instanceof Widget2x2Provider){
             views=new RemoteViews(context.getPackageName(), R.layout.appwidget_2x2);
-            Log.d(TAG, "instanceof Widget2x2Provider");
+            //Log.d(TAG, "instanceof Widget2x2Provider");
         }else{
             // TODO Write a better log message
             Log.e(TAG, "instanceof ERROR !!!");
         }
 
         for(int appWidgetId : appWidgetIds){
-            Log.d(TAG, "appWidgetId: " + appWidgetId);
             views.setViewVisibility(R.id.progress_bar, View.GONE);
             views.setViewVisibility(R.id.tv_footer, View.VISIBLE);
 
@@ -181,26 +166,23 @@ public class WidgetProvider extends AppWidgetProvider {
         AlarmManager alarmManager = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
 
         PendingIntent pi = PendingIntent.getBroadcast(context, 0, new Intent(Constants.FORCE_WIDGET_UPDATE), 0);
-        
+
         GregorianCalendar now = new GregorianCalendar(TimeZone.getDefault());
         GregorianCalendar triggerCalendar = (GregorianCalendar)now.clone();
-        Log.d(TAG, "gcal: " + triggerCalendar.getTime().toString());
-        
-        Log.d(TAG, "getHours: " + ubuntuReleaseDay.getTime().getHours());
-        Log.d(TAG, "getMinutes: " + ubuntuReleaseDay.getTime().getMinutes());
-        Log.d(TAG, "getSeconds: " + ubuntuReleaseDay.getTime().getSeconds());
         
         triggerCalendar.set(Calendar.HOUR_OF_DAY, ubuntuReleaseDay.getTime().getHours());
         triggerCalendar.set(Calendar.MINUTE, ubuntuReleaseDay.getTime().getMinutes());
         triggerCalendar.set(Calendar.SECOND, ubuntuReleaseDay.getTime().getSeconds() + 1);
         triggerCalendar.set(Calendar.MILLISECOND, 0);
         if(triggerCalendar.before(now)){
-            triggerCalendar.add(Calendar.DAY_OF_YEAR, 1);    
+            triggerCalendar.add(Calendar.HOUR_OF_DAY, 12);
+            if(triggerCalendar.before(now)){
+                triggerCalendar.add(Calendar.HOUR_OF_DAY, 12);    
+            }
         }
-        
-        triggerCalendar.getTimeInMillis();
-        Log.d(TAG, "AlarmManager next update: " + triggerCalendar.getTime().toString());
 
+        triggerCalendar.getTimeInMillis();
+        
         alarmManager.cancel(pi);
         alarmManager.setRepeating(AlarmManager.RTC, triggerCalendar.getTimeInMillis(), AlarmManager.INTERVAL_HALF_DAY, pi);
     }

@@ -75,7 +75,7 @@
 	<string
 		name="pref_show_tutorial">Visualizza tutorial</string>
 	<string
-		name="pref_show_tutorial_summary">Mostra il tutorial quando clicchi sull\'icona del launcher</string>
+		name="pref_show_tutorial_summary">Mostra il tutorial quando si clicca l\'icona del launcher</string>
 	<string
 		name="pref_info_version">Versione</string>
 	<string
