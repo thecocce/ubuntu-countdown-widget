@@ -16,18 +16,19 @@
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	android:layout_width="160dp"
 	android:layout_height="160dp"
-	android:background="@drawable/background"
+	android:background="@drawable/background_light"
 	android:paddingLeft="10dp"
 	android:paddingRight="10dp"
 	android:paddingTop="16dp"
-	android:paddingBottom="16dp">
+	android:paddingBottom="16dp"
+	android:id="@+id/rl_widget">
 	<ImageView
 		android:layout_height="wrap_content"
 		android:layout_alignParentTop="true"
 		android:layout_width="wrap_content"
 		android:id="@+id/iv_header"
 		android:layout_centerHorizontal="true"
-		android:src="@drawable/ubuntu_large"
+		android:src="@drawable/ubuntu_large_light"
 		android:paddingTop="2dp"
 		android:paddingLeft="4dp" />
 	<TextView
@@ -60,7 +61,7 @@
 		android:layout_width="wrap_content"
 		android:id="@+id/tv_footer"
 		android:layout_centerHorizontal="true"
-		style="@style/Footer"
+		style="@style/Footer.Light"
 		android:text="@string/days_left"
 		android:visibility="invisible"
 		android:textSize="20dip" />

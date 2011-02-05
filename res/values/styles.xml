@@ -32,13 +32,23 @@
 		<item
 			name="android:textColor">@color/redbuntu</item>
 	</style>
-
+	
 	<style
 		name="Footer"
 		parent="@android:style/Widget.TextView">
 		<item
 			name="android:gravity">center_vertical|center_horizontal</item>
+	</style>
+	<style
+		name="Footer.Light"
+		parent="@style/Footer">
 		<item
 			name="android:textColor">@color/gray</item>
+	</style>
+		<style
+		name="Footer.Dark"
+		parent="@style/Footer">
+		<item
+			name="android:textColor">@color/white</item>
 	</style>
 </resources>

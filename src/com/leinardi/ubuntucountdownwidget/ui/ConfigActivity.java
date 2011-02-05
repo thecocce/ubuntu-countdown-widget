@@ -34,6 +34,7 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
+import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
@@ -52,6 +53,7 @@ public class ConfigActivity extends PreferenceActivity implements OnSharedPrefer
     SharedPreferences mPrefs;
     Preference customDatePicker;
     CheckBoxPreference customDateCheckbox;
+    ListPreference lpTheme;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

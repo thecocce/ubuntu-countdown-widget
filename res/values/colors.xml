@@ -14,6 +14,8 @@
 
 <resources>
 	<color
+		name="white">#ffffff</color>
+	<color
 		name="redbuntu">#DD4814</color>
 	<color
 		name="gray">#333333</color>

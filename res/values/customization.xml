@@ -16,6 +16,10 @@
 	<string
 		name="app_name">Ubuntu Countdown Widget</string>
 	<string
+		name="on_touch_defaultValue">config</string>
+	<string
+		name="url_defaultValue">www.ubuntu.com</string>
+	<string
 		name="changelog_filename">changelog.html</string>
 	<string
 		name="changelog_title">Changelog</string>

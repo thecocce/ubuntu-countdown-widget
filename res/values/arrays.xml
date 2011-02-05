@@ -12,12 +12,32 @@
 		with this program. If not, see <http://www.gnu.org/licenses/>.
 	-->
 
-<appwidget-provider
-	xmlns:android="http://schemas.android.com/apk/res/android"
-	android:minWidth="72dip"
-	android:minHeight="72dip"
-	android:updatePeriodMillis="86400000"
-	android:initialLayout="@layout/appwidget_1x1_light"
-	android:label="@string/widget_1x1_name"
-	android:configure="com.leinardi.ubuntucountdownwidget.ui.ConfigActivity">
-</appwidget-provider>
+<resources>
+	<string-array
+		name="pref_theme_entries">
+		<item>Light theme</item>
+		<item>Dark theme</item>
+	</string-array>
+
+	<string-array
+		name="pref_theme_values"
+		translatable="false">
+		<item>light</item>
+		<item>dark</item>
+	</string-array>
+
+	<string-array
+		name="pref_on_touch_entries">
+		<item>Disabled</item>
+		<item>Open widget settings</item>
+		<item>Open URL</item>
+	</string-array>
+
+	<string-array
+		name="pref_on_touch_values"
+		translatable="false">
+		<item>disabled</item>
+		<item>config</item>
+		<item>url</item>
+	</string-array>
+</resources>

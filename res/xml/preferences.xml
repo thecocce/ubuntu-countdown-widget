@@ -30,6 +30,29 @@
 			android:key="@string/pref_custom_date_key"
 			android:dependency="@string/pref_custom_date_checkbox_key"
 			android:title="@string/pref_custom_date" />
+		<ListPreference
+			android:key="@string/pref_theme_key"
+			android:defaultValue="light"
+			android:title="theme"
+			android:summary="theme_summary"
+			android:entries="@array/pref_theme_entries"
+			android:entryValues="@array/pref_theme_values"
+			android:dialogTitle="theme_dialogtitle" />
+		<ListPreference
+			android:key="@string/pref_on_touch_key"
+			android:defaultValue="@string/on_touch_defaultValue"
+			android:title="on touch"
+			android:summary="on touch_summary"
+			android:entries="@array/pref_on_touch_entries"
+			android:entryValues="@array/pref_on_touch_values"
+			android:dialogTitle="on touch_dialogtitle" />
+		<EditTextPreference
+			android:key="@string/pref_url_key"
+			android:title="url"
+			android:summary="url_summary"
+			android:dialogTitle="url_dialogtitle"
+			android:defaultValue="@string/url_defaultValue"
+			android:inputType="textUri" />
 	</PreferenceCategory>
 	<PreferenceCategory
 		android:title="@string/pref_launcher_options">

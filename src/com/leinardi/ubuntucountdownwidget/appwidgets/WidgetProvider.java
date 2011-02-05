@@ -30,6 +30,7 @@ import com.leinardi.ubuntucountdownwidget.R;
 import com.leinardi.ubuntucountdownwidget.customviews.DatePreference;
 import com.leinardi.ubuntucountdownwidget.misc.Constants;
 import com.leinardi.ubuntucountdownwidget.misc.Log;
+import com.leinardi.ubuntucountdownwidget.ui.ConfigActivity;
 import com.leinardi.ubuntucountdownwidget.utils.Utils;
 
 import android.app.AlarmManager;
@@ -40,6 +41,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.preference.PreferenceManager;
 import android.text.format.DateUtils;
 import android.view.View;
@@ -99,10 +101,12 @@ public class WidgetProvider extends AppWidgetProvider {
     }
 
     public void updateWidget(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds){
-//        Log.d(TAG, "updateWidget");
+        //        Log.d(TAG, "updateWidget");
 
         SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(context);
-       
+        boolean isThemeDark = mPrefs.getString(context.getString(R.string.pref_theme_key), "light").equals("dark");
+
+
         GregorianCalendar today = new GregorianCalendar(TimeZone.getTimeZone("GMT"));
         GregorianCalendar ubuntuReleaseDay = Utils.getInstance().getUbuntuReleseDate();
 
@@ -121,10 +125,12 @@ public class WidgetProvider extends AppWidgetProvider {
         RemoteViews views=null;
 
         if(this instanceof Widget1x1Provider){
-            views=new RemoteViews(context.getPackageName(), R.layout.appwidget_1x1);   
+            views=new RemoteViews(context.getPackageName(),
+                    isThemeDark ? R.layout.appwidget_1x1_dark : R.layout.appwidget_1x1_light);   
             //Log.d(TAG, "instanceof Widget1x1Provider");
         }else if(this instanceof Widget2x2Provider){
-            views=new RemoteViews(context.getPackageName(), R.layout.appwidget_2x2);
+            views=new RemoteViews(context.getPackageName(),
+                    isThemeDark ? R.layout.appwidget_2x2_dark : R.layout.appwidget_2x2_light);
             //Log.d(TAG, "instanceof Widget2x2Provider");
         }else{
             // TODO Write a better log message
@@ -158,6 +164,32 @@ public class WidgetProvider extends AppWidgetProvider {
                 views.setTextViewText(R.id.tv_footer, context.getString(R.string.coming_soon));
             }
 
+            String strOnTouch = mPrefs.getString(context.getString(R.string.pref_on_touch_key),
+                    context.getString(R.string.on_touch_defaultValue));
+            Log.d(TAG, "strOnTouch=" + strOnTouch);
+            if(!strOnTouch.equals("disabled")){
+                Intent intent;
+                if(strOnTouch.equals("config")){
+                    intent = new Intent(context, ConfigActivity.class);
+                }else{
+                    String url = mPrefs.getString(context.getString(R.string.pref_url_key),
+                            context.getString(R.string.url_defaultValue));;
+                    if (!url.startsWith("http://") && !url.startsWith("https://")){
+                        url = "http://" + url;
+                    }
+                    intent = new Intent(Intent.ACTION_VIEW);
+                    intent.setData(Uri.parse(url));
+                }
+                
+                intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
+
+                PendingIntent pendingIntent = PendingIntent.getActivity(context,
+                        0 /* no requestCode */,
+                        intent,
+                        0 /* no flags */);
+                views.setOnClickPendingIntent(R.id.rl_widget, pendingIntent);
+            }
+
             appWidgetManager.updateAppWidget(appWidgetId, views);
         }
     }
@@ -169,7 +201,7 @@ public class WidgetProvider extends AppWidgetProvider {
 
         GregorianCalendar now = new GregorianCalendar(TimeZone.getDefault());
         GregorianCalendar triggerCalendar = (GregorianCalendar)now.clone();
-        
+
         triggerCalendar.set(Calendar.HOUR_OF_DAY, ubuntuReleaseDay.getTime().getHours());
         triggerCalendar.set(Calendar.MINUTE, ubuntuReleaseDay.getTime().getMinutes());
         triggerCalendar.set(Calendar.SECOND, ubuntuReleaseDay.getTime().getSeconds() + 1);
@@ -182,7 +214,7 @@ public class WidgetProvider extends AppWidgetProvider {
         }
 
         triggerCalendar.getTimeInMillis();
-        
+
         alarmManager.cancel(pi);
         alarmManager.setRepeating(AlarmManager.RTC, triggerCalendar.getTimeInMillis(), AlarmManager.INTERVAL_HALF_DAY, pi);
     }
