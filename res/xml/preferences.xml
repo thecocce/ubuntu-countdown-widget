@@ -33,24 +33,24 @@
 		<ListPreference
 			android:key="@string/pref_theme_key"
 			android:defaultValue="light"
-			android:title="theme"
-			android:summary="theme_summary"
+			android:title="@string/pref_theme"
+			android:summary="@string/pref_theme_summary"
 			android:entries="@array/pref_theme_entries"
 			android:entryValues="@array/pref_theme_values"
-			android:dialogTitle="theme_dialogtitle" />
+			android:dialogTitle="@string/pref_theme" />
 		<ListPreference
 			android:key="@string/pref_on_touch_key"
 			android:defaultValue="@string/on_touch_defaultValue"
-			android:title="on touch"
-			android:summary="on touch_summary"
+			android:title="@string/pref_on_touch"
+			android:summary="@string/pref_on_touch_summary"
 			android:entries="@array/pref_on_touch_entries"
 			android:entryValues="@array/pref_on_touch_values"
-			android:dialogTitle="on touch_dialogtitle" />
+			android:dialogTitle="@string/pref_on_touch" />
 		<EditTextPreference
 			android:key="@string/pref_url_key"
-			android:title="url"
-			android:summary="url_summary"
-			android:dialogTitle="url_dialogtitle"
+			android:title="@string/pref_url"
+			android:summary="@string/pref_url_summary"
+			android:dialogTitle="@string/pref_url"
 			android:defaultValue="@string/url_defaultValue"
 			android:inputType="textUri" />
 	</PreferenceCategory>

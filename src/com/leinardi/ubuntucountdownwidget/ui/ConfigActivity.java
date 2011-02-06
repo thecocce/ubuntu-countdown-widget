@@ -34,6 +34,7 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
+import android.preference.EditTextPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
@@ -50,10 +51,10 @@ public class ConfigActivity extends PreferenceActivity implements OnSharedPrefer
     private static String CONFIGURE_ACTION="android.appwidget.action.APPWIDGET_CONFIGURE";
     private final String REPORT_A_BUG_URL = "http://code.google.com/p/ubuntu-countdown-widget/issues/list";
 
-    SharedPreferences mPrefs;
-    Preference customDatePicker;
-    CheckBoxPreference customDateCheckbox;
-    ListPreference lpTheme;
+    private SharedPreferences mPrefs;
+    private Preference customDatePicker;
+    private CheckBoxPreference customDateCheckbox;
+    private EditTextPreference etURL;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -69,6 +70,15 @@ public class ConfigActivity extends PreferenceActivity implements OnSharedPrefer
 
         customDateCheckbox = (CheckBoxPreference) findPreference(getString(R.string.pref_custom_date_checkbox_key));
         customDatePicker = findPreference(getString(R.string.pref_custom_date_key));
+        etURL = (EditTextPreference)findPreference(getString(R.string.pref_url_key));
+
+        //TODO spostare in un metodo...
+        if(mPrefs.getString(getString(R.string.pref_on_touch_key),
+                getString(R.string.on_touch_defaultValue)).equals("url")){
+            etURL.setEnabled(true);
+        }else{
+            etURL.setEnabled(false);
+        }
 
         ((CheckBoxPreference)findPreference(getString(R.string.pref_show_launcher_icon_key)))
         .setOnPreferenceClickListener(new OnPreferenceClickListener() {
@@ -140,6 +150,14 @@ public class ConfigActivity extends PreferenceActivity implements OnSharedPrefer
                     DatePreference.DEFAULT_VALUE);
             customDatePicker.setSummary(DateFormat.getDateInstance(DateFormat.LONG,
                     Locale.getDefault()).format(dateInMillis));
+        }else if(key.equals(getString(R.string.pref_on_touch_key))) {
+            //TODO spostare in un metodo...
+            if(sharedPreferences.getString(getString(R.string.pref_on_touch_key),
+                    getString(R.string.on_touch_defaultValue)).equals("url")){
+                etURL.setEnabled(true);
+            }else{
+                etURL.setEnabled(false);
+            }
         }
     }
 

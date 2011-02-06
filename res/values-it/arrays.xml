@@ -15,29 +15,15 @@
 <resources>
 	<string-array
 		name="pref_theme_entries">
-		<item>Light</item>
-		<item>Dark</item>
-	</string-array>
-
-	<string-array
-		name="pref_theme_values"
-		translatable="false">
-		<item>light</item>
-		<item>dark</item>
+		<item>Chiaro</item>
+		<item>Scuro</item>
 	</string-array>
 
 	<string-array
 		name="pref_on_touch_entries">
-		<item>Do nothing</item>
-		<item>Open widget settings</item>
-		<item>Open URL</item>
+		<item>Non far nulla</item>
+		<item>Apri impostazioni widget</item>
+		<item>Apri URL</item>
 	</string-array>
 
-	<string-array
-		name="pref_on_touch_values"
-		translatable="false">
-		<item>disabled</item>
-		<item>config</item>
-		<item>url</item>
-	</string-array>
 </resources>

@@ -67,15 +67,29 @@
 	<string
 		name="pref_custom_date">Seleziona data personalizzata</string>
 	<string
+		name="pref_theme">Tema</string>
+	<string
+		name="pref_theme_summary">Segli se utilizzare un tema chiaro o scuro</string>
+	<string
+		name="pref_on_touch">Azione al tocco</string>
+	<string
+		name="pref_on_touch_summary">Scegli quale azione eseguire al tocco del widget</string>
+	<string
+		name="pref_url">URL</string>
+	<string
+		name="pref_url_summary">Imposta una URL personalizzata</string>
+	<string
 		name="pref_launcher_options">Opzioni launcher</string>
 	<string
 		name="pref_show_launcher_icon">Icona sul launcher</string>
 	<string
-		name="pref_show_launcher_icon_summary">Se non spuntato nasconde l\'icona del widget sul launcher (richiede riavvio)</string>
+		name="pref_show_launcher_icon_summary">Se non spuntato nasconde l\'icona del widget sul launcher
+		(richiede riavvio)</string>
 	<string
 		name="pref_show_tutorial">Visualizza tutorial</string>
 	<string
-		name="pref_show_tutorial_summary">Mostra il tutorial quando si clicca l\'icona del launcher</string>
+		name="pref_show_tutorial_summary">Mostra il tutorial quando si clicca l\'icona del launcher
+	</string>
 	<string
 		name="pref_info_version">Versione</string>
 	<string
