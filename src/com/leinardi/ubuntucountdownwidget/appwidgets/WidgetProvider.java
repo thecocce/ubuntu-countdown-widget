@@ -167,8 +167,8 @@ public class WidgetProvider extends AppWidgetProvider {
             String strOnTouch = mPrefs.getString(context.getString(R.string.pref_on_touch_key),
                     context.getString(R.string.on_touch_defaultValue));
             Log.d(TAG, "strOnTouch=" + strOnTouch);
+            Intent intent;
             if(!strOnTouch.equals("disabled")){
-                Intent intent;
                 if(strOnTouch.equals("config")){
                     intent = new Intent(context, ConfigActivity.class);
                 }else{
@@ -183,12 +183,18 @@ public class WidgetProvider extends AppWidgetProvider {
                 
                 intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
 
-                PendingIntent pendingIntent = PendingIntent.getActivity(context,
-                        0 /* no requestCode */,
-                        intent,
-                        0 /* no flags */);
-                views.setOnClickPendingIntent(R.id.rl_widget, pendingIntent);
+                
+            }else{
+                //TODO This is ugly :(
+                intent = new Intent("com.leinardi.donothing");
             }
+            
+            PendingIntent pendingIntent = PendingIntent.getActivity(context,
+                    0 /* no requestCode */,
+                    intent,
+                    0 /* no flags */);
+            views.setOnClickPendingIntent(R.id.rl_widget, pendingIntent);
+            
 
             appWidgetManager.updateAppWidget(appWidgetId, views);
         }

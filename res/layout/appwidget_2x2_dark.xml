@@ -28,7 +28,7 @@
 		android:layout_width="wrap_content"
 		android:id="@+id/iv_header"
 		android:layout_centerHorizontal="true"
-		android:src="@drawable/ubuntu_large_light"
+		android:src="@drawable/ubuntu_large_dark"
 		android:paddingTop="2dp"
 		android:paddingLeft="4dp" />
 	<TextView

@@ -28,7 +28,7 @@
 		android:layout_alignParentTop="true"
 		android:id="@+id/iv_header"
 		android:layout_centerHorizontal="true"
-		android:src="@drawable/ubuntu_small_light"
+		android:src="@drawable/ubuntu_small_dark"
 		android:paddingTop="2dp"
 		android:paddingLeft="2dp" />
 	<TextView
