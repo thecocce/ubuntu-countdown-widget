@@ -2,7 +2,7 @@
 <manifest
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	package="com.leinardi.ubuntucountdownwidget"
-	android:versionCode="10"
+	android:versionCode="100"
 	android:versionName="1.0.0">
 	<application
 		android:icon="@drawable/ic_launcher_ucw"
