@@ -69,7 +69,7 @@
 	<string
 		name="pref_theme">Tema</string>
 	<string
-		name="pref_theme_summary">Segli se utilizzare un tema chiaro o scuro</string>
+		name="pref_theme_summary">Scegli se utilizzare un tema chiaro o scuro</string>
 	<string
 		name="pref_on_touch">Azione al tocco</string>
 	<string
