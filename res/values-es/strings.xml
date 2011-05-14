@@ -18,7 +18,7 @@
 	<string
 		name="widget_2x2_name">Ubuntu Countdown 2x2</string>
 	<string
-		name="days_left">Daías restantes</string>
+		name="days_left">Días faltan</string>
 	<string
 		name="coming_soon">Próximamente</string>
 	<string
@@ -83,7 +83,8 @@
 	<string
 		name="pref_show_launcher_icon">Mostrar icono en Launcher</string>
 	<string
-		name="pref_show_launcher_icon_summary">Si descarmas, esconde el widget del launcher (necesario reiniciar)</string>
+		name="pref_show_launcher_icon_summary">Si descarmas, esconde el widget del launcher (necesario
+		reiniciar)</string>
 	<string
 		name="pref_show_tutorial">Mostrar tutorial</string>
 	<string
@@ -97,7 +98,8 @@
 	<string
 		name="pref_donate">Comprame una cerveza</string>
 	<string
-		name="pref_donate_summary">Ayudame a mantener mis aplicaciones gratis y sin anuncios</string>
+		name="pref_donate_summary">Ayudame a mantener mis aplicaciones gratis y sin anuncios
+	</string>
 	<string
 		name="pref_report_a_bug">Reportar un fallo</string>
 	<string
