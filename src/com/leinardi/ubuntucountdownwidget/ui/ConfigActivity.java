@@ -45,6 +45,7 @@ import android.view.KeyEvent;
 
 import java.text.DateFormat;
 import java.util.Locale;
+import java.util.TimeZone;
 
 public class ConfigActivity extends PreferenceActivity implements OnSharedPreferenceChangeListener {
     private final static String TAG = "ConfigActivity";
@@ -66,7 +67,7 @@ public class ConfigActivity extends PreferenceActivity implements OnSharedPrefer
 
         String releaseDate = DateFormat.getDateInstance(DateFormat.LONG,
                 Locale.getDefault()).format(Utils.getInstance().getUbuntuReleseDate().getTime());
-        findPreference(getString(R.string.pref_default_release_date_key)).setSummary(releaseDate);
+        findPreference(getString(R.string.pref_default_release_date_key)).setSummary(releaseDate + " " + TimeZone.getDefault().getDisplayName());
 
         customDateCheckbox = (CheckBoxPreference) findPreference(getString(R.string.pref_custom_date_checkbox_key));
         customDatePicker = findPreference(getString(R.string.pref_custom_date_key));
