@@ -7,7 +7,7 @@ import android.content.pm.PackageManager;
 import android.view.View;
 import android.webkit.WebView;
 
-import com.leinardi.donation.ui.DonationActivity;
+import com.leinardi.donation.ui.DonationActivityStandalone;
 import com.leinardi.ubuntucountdownwidget.R;
 import com.leinardi.ubuntucountdownwidget.misc.Log;
 
@@ -69,7 +69,7 @@ public class Utils {
         }
     }
     public void donate(Context mContext) {
-        Intent intent = new Intent(mContext, DonationActivity.class);
+        Intent intent = new Intent(mContext, DonationActivityStandalone.class);
         mContext.startActivity(intent);
     }
     

@@ -59,8 +59,8 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.leinardi.donation.ui.DonationActivity"
-            android:theme="@android:style/Theme.Light" >
+            android:name="com.leinardi.donation.ui.DonationActivityStandalone"
+            android:theme="@android:style/Theme.Light.NoTitleBar" >
         </activity>
 
         <service android:name="net.robotmedia.billing.BillingService" />
