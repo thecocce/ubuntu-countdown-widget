@@ -1,5 +1,16 @@
 package com.leinardi.ubuntucountdownwidget.utils;
 
+import android.content.ComponentName;
+import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.view.View;
+import android.webkit.WebView;
+
+import com.leinardi.donation.ui.DonationActivity;
+import com.leinardi.ubuntucountdownwidget.R;
+import com.leinardi.ubuntucountdownwidget.misc.Log;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -7,19 +18,9 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.TimeZone;
 
-import com.leinardi.ubuntucountdownwidget.R;
-import com.leinardi.ubuntucountdownwidget.misc.Log;
-
-import android.content.ComponentName;
-import android.content.Context;
-import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.net.Uri;
-import android.view.View;
-import android.webkit.WebView;
-
 public class Utils {
-    private final static String TAG = "Utils";
+    @SuppressWarnings("unused")
+    private final static String TAG = Utils.class.getSimpleName();
     private static final Utils INSTANCE = new Utils();
 
     // Private constructor prevents instantiation from other classes
@@ -68,9 +69,7 @@ public class Utils {
         }
     }
     public void donate(Context mContext) {
-        Intent intent = new Intent( Intent.ACTION_VIEW,
-                Uri.parse("market://search?q=Donation%20pub:%22Roberto%20Leinardi%22") );
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        Intent intent = new Intent(mContext, DonationActivity.class);
         mContext.startActivity(intent);
     }
     
@@ -84,7 +83,7 @@ public class Utils {
 
     public GregorianCalendar getUbuntuReleseDate() {
         GregorianCalendar ubuntuReleaseDate = new GregorianCalendar(TimeZone.getTimeZone("GMT"));
-        ubuntuReleaseDate.set(2011, Calendar.OCTOBER, 13, 0, 0, 0);
+        ubuntuReleaseDate.set(2012, Calendar.APRIL, 26, 0, 0, 0);
         
         return (GregorianCalendar)ubuntuReleaseDate.clone();
     }

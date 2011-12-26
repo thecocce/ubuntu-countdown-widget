@@ -1,56 +1,47 @@
-/**
- *  Libretto Universitario
- *  Copyright (C) 2010 Roberto Leinardi
- *  
- *  This program is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
- *  
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *  
- *  You should have received a copy of the GNU General Public License
- *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *  
- */
-
 package com.leinardi.ubuntucountdownwidget.misc;
-
-import android.util.Config;
 
 public class Log
 {
-	private final static String LOGTAG = "UbuntuCountdown";
+	private final static String LOGTAG = "UCW";
 
-	//static final boolean DEBUG = false;
-	//public static final boolean LOGV = DEBUG ? Config.LOGD : Config.LOGV;
-	//Replace all Log.d with if(Log.LOGV) Log.v() to prevent Strings to be builded and to save memory
+	public static final int NONE = 0;
+	public static final int ERRORS_ONLY = 1;
+	public static final int ERRORS_WARNINGS = 2;
+	public static final int ERRORS_WARNINGS_INFO = 3;
+	public static final int ERRORS_WARNINGS_INFO_DEBUG = 4;
+	public static final int ERRORS_WARNINGS_INFO_DEBUG_VERBOSE = 5;
 
-	public static void v(String TAG, String logMe)
-	{
-		if(Config.LOGV) android.util.Log.v(LOGTAG, TAG + ": " + logMe);
+	private static final int LOGGING_LEVEL = ERRORS_WARNINGS_INFO_DEBUG_VERBOSE;
+
+//	public static void wtf(String TAG, String logMe, Throwable ex){
+//		if(LOGGING_LEVEL >= 1) android.util.Log.wtf(LOGTAG, TAG + ": " + logMe, ex);
+//	}
+//	
+//	public static void wtf(String TAG, String logMe){
+//		if(LOGGING_LEVEL >= 1) android.util.Log.wtf(LOGTAG, TAG + ": " + logMe);
+//	}
+	
+	public static void e(String TAG, String logMe, Throwable ex){
+		if(LOGGING_LEVEL >= 1) android.util.Log.e(LOGTAG, TAG + ": " + logMe, ex);
+	}
+	
+	public static void e(String TAG, String logMe){
+		if(LOGGING_LEVEL >= 1) android.util.Log.e(LOGTAG, TAG + ": " + logMe);
+	}
+	
+	public static void w(String TAG, String logMe){
+		if(LOGGING_LEVEL >= 2)  android.util.Log.w(LOGTAG, TAG + ": " + logMe);
+	}
+	
+	public static void i(String TAG, String logMe){
+		if(LOGGING_LEVEL >= 3) android.util.Log.i(LOGTAG, TAG + ": " + logMe);
 	}
 
-	public static void d(String TAG, String logMe)
-	{
-		if(Config.LOGD) android.util.Log.d(LOGTAG, TAG + ": " + logMe);
+	public static void d(String TAG, String logMe){
+		if(LOGGING_LEVEL >= 4) android.util.Log.d(LOGTAG, TAG + ": " + logMe);
 	}
-
-	public static void e(String TAG, String logMe)
-	{
-		android.util.Log.e(LOGTAG, TAG + ": " + logMe);
-	}
-
-	public static void e(String TAG, String logMe, Throwable ex)
-	{
-		android.util.Log.e(LOGTAG, TAG + ": " + logMe, ex);
-	}
-
-	public static void i(String TAG, String logMe)
-	{
-		if(Config.LOGD) android.util.Log.i(LOGTAG, TAG + ": " + logMe);
+	
+	public static void v(String TAG, String logMe){
+		if(LOGGING_LEVEL >= 5) android.util.Log.v(LOGTAG, TAG + ": " + logMe);
 	}
 }
