@@ -19,6 +19,7 @@
 
 package com.leinardi.ubuntucountdownwidget.ui;
 
+import com.leinardi.analytics.AnalyticsUtils;
 import com.leinardi.ubuntucountdownwidget.customviews.DatePreference;
 import com.leinardi.ubuntucountdownwidget.misc.Log;
 import com.leinardi.ubuntucountdownwidget.R;
@@ -60,6 +61,8 @@ public class ConfigActivity extends PreferenceActivity implements OnSharedPrefer
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        
+        AnalyticsUtils.getInstance(this).trackPageView("/Config");
 
         addPreferencesFromResource(R.xml.preferences);
 

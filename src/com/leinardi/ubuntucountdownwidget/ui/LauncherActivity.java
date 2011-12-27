@@ -1,5 +1,6 @@
 package com.leinardi.ubuntucountdownwidget.ui;
 
+import com.leinardi.analytics.AnalyticsUtils;
 import com.leinardi.ubuntucountdownwidget.R;
 import android.app.Activity;
 import android.content.Intent;
@@ -27,6 +28,8 @@ public class LauncherActivity extends Activity {
         if(!mPrefs.getBoolean(getString(R.string.pref_show_tutorial_key), true)){
             startConfigActivity();
         }
+        
+        AnalyticsUtils.getInstance(this).trackPageView("/Launcher");
 
         setContentView(R.layout.info);
         WebView web = (WebView) findViewById(R.id.wv_info);

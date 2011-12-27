@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-	<!--
+<!--
 		Ubuntu Countdown Widget Copyright (C) 2011 Roberto Leinardi This
 		program is free software: you can redistribute it and/or modify it
 		under the terms of the GNU General Public License as published by the
@@ -10,105 +10,108 @@
 		PURPOSE. See the GNU General Public License for more details. You
 		should have received a copy of the GNU General Public License along
 		with this program. If not, see <http://www.gnu.org/licenses/>.
-	-->
+-->
 
-<PreferenceScreen
-	xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:app="http://schemas.android.com/apk/res/com.leinardi.ubuntucountdownwidget">
-	<PreferenceCategory
-		android:title="@string/pref_countdown_options">
-		<Preference
-			android:key="@string/pref_default_release_date_key"
-			style="?android:preferenceInformationStyle"
-			android:title="@string/pref_default_release_date" />
-		<CheckBoxPreference
-			android:key="@string/pref_custom_date_checkbox_key"
-			android:title="@string/pref_custom_date_checkbox"
-			android:summary="@string/pref_custom_date_checkbox_summary"
-			android:defaultValue="false" />
-		<com.leinardi.ubuntucountdownwidget.customviews.DatePreference
-			android:key="@string/pref_custom_date_key"
-			android:dependency="@string/pref_custom_date_checkbox_key"
-			android:title="@string/pref_custom_date" />
-		<ListPreference
-			android:key="@string/pref_theme_key"
-			android:defaultValue="light"
-			android:title="@string/pref_theme"
-			android:summary="@string/pref_theme_summary"
-			android:entries="@array/pref_theme_entries"
-			android:entryValues="@array/pref_theme_values"
-			android:dialogTitle="@string/pref_theme" />
-		<ListPreference
-			android:key="@string/pref_on_touch_key"
-			android:defaultValue="@string/on_touch_defaultValue"
-			android:title="@string/pref_on_touch"
-			android:summary="@string/pref_on_touch_summary"
-			android:entries="@array/pref_on_touch_entries"
-			android:entryValues="@array/pref_on_touch_values"
-			android:dialogTitle="@string/pref_on_touch" />
-		<EditTextPreference
-			android:key="@string/pref_url_key"
-			android:title="@string/pref_url"
-			android:summary="@string/pref_url_summary"
-			android:dialogTitle="@string/pref_url"
-			android:defaultValue="@string/url_defaultValue"
-			android:inputType="textUri" />
-	</PreferenceCategory>
-	<PreferenceCategory
-		android:title="@string/pref_launcher_options">
-		<CheckBoxPreference
-			android:key="@string/pref_show_launcher_icon_key"
-			android:title="@string/pref_show_launcher_icon"
-			android:summary="@string/pref_show_launcher_icon_summary"
-			android:defaultValue="true" />
-		<CheckBoxPreference
-			android:key="@string/pref_show_tutorial_key"
-			android:dependency="@string/pref_show_launcher_icon_key"
-			android:title="@string/pref_show_tutorial"
-			android:summary="@string/pref_show_tutorial_summary"
-			android:defaultValue="true" />
-	</PreferenceCategory>
-	<PreferenceCategory
-		android:title="@string/info">
-		<Preference
-			android:key="@string/pref_info_version_key"
-			style="?android:preferenceInformationStyle"
-			android:title="@string/pref_info_version" />
-		<!--		<Preference-->
-		<!--			android:key="@string/pref_info_key"-->
-		<!--			android:title="@string/info"-->
-		<!--			android:summary="@string/pref_info_summary" />-->
-		<Preference
-			android:key="@string/pref_report_a_bug_key"
-			android:title="@string/pref_report_a_bug"
-			android:summary="@string/pref_report_a_bug_summary" />
-		<com.leinardi.ubuntucountdownwidget.customviews.MyDialogPreference
-			app:fileName="@string/changelog_filename"
-			android:key="@string/pref_changelog_key"
-			android:title="@string/changelog_title"
-			android:summary="@string/pref_display_changelog_summary"
-			android:dialogIcon="@drawable/ic_dialog_info"
-			android:dialogTitle="@string/changelog_title"
-			android:negativeButtonText="@null" />
-		<com.leinardi.ubuntucountdownwidget.customviews.MyDialogPreference
-			app:fileName="@string/eula_filename"
-			android:key="@string/pref_eula_key"
-			android:title="@string/eula_title"
-			android:summary="@string/pref_display_eula_summary"
-			android:dialogIcon="@drawable/ic_dialog_agenda"
-			android:dialogTitle="@string/eula_title"
-			android:negativeButtonText="@null" />
-		<com.leinardi.ubuntucountdownwidget.customviews.DonateDialogPreference
-			app:fileName="@string/changelog_filename"
-			android:key="@string/pref_donate_key"
-			android:title="@string/pref_donate"
-			android:summary="@string/pref_donate_summary"
-			android:dialogIcon="@drawable/ic_dialog_beer"
-			android:dialogTitle="@string/pref_donate"
-			android:dialogMessage="@string/donate_message"
-			android:positiveButtonText="@string/yes"
-			android:negativeButtonText="@string/no" />
-	</PreferenceCategory>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res/com.leinardi.ubuntucountdownwidget" >
+
+    <PreferenceCategory android:title="@string/pref_donate_title" >
+        <com.leinardi.ubuntucountdownwidget.customviews.DonateDialogPreference
+            android:dialogIcon="@drawable/ic_dialog_beer"
+            android:dialogMessage="@string/donate_message"
+            android:dialogTitle="@string/pref_donate"
+            app:fileName="@string/changelog_filename"
+            android:key="@string/pref_donate_key"
+            android:negativeButtonText="@string/no"
+            android:positiveButtonText="@string/yes"
+            android:summary="@string/pref_donate_summary"
+            android:title="@string/pref_donate" />
+    </PreferenceCategory>
+    <PreferenceCategory android:title="@string/pref_countdown_options" >
+        <Preference
+            style="?android:preferenceInformationStyle"
+            android:key="@string/pref_default_release_date_key"
+            android:title="@string/pref_default_release_date" />
+
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="@string/pref_custom_date_checkbox_key"
+            android:summary="@string/pref_custom_date_checkbox_summary"
+            android:title="@string/pref_custom_date_checkbox" />
+
+        <com.leinardi.ubuntucountdownwidget.customviews.DatePreference
+            android:dependency="@string/pref_custom_date_checkbox_key"
+            android:key="@string/pref_custom_date_key"
+            android:title="@string/pref_custom_date" />
+
+        <ListPreference
+            android:defaultValue="light"
+            android:dialogTitle="@string/pref_theme"
+            android:entries="@array/pref_theme_entries"
+            android:entryValues="@array/pref_theme_values"
+            android:key="@string/pref_theme_key"
+            android:summary="@string/pref_theme_summary"
+            android:title="@string/pref_theme" />
+        <ListPreference
+            android:defaultValue="@string/on_touch_defaultValue"
+            android:dialogTitle="@string/pref_on_touch"
+            android:entries="@array/pref_on_touch_entries"
+            android:entryValues="@array/pref_on_touch_values"
+            android:key="@string/pref_on_touch_key"
+            android:summary="@string/pref_on_touch_summary"
+            android:title="@string/pref_on_touch" />
+
+        <EditTextPreference
+            android:defaultValue="@string/url_defaultValue"
+            android:dialogTitle="@string/pref_url"
+            android:inputType="textUri"
+            android:key="@string/pref_url_key"
+            android:summary="@string/pref_url_summary"
+            android:title="@string/pref_url" />
+    </PreferenceCategory>
+    <PreferenceCategory android:title="@string/pref_launcher_options" >
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="@string/pref_show_launcher_icon_key"
+            android:summary="@string/pref_show_launcher_icon_summary"
+            android:title="@string/pref_show_launcher_icon" />
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:dependency="@string/pref_show_launcher_icon_key"
+            android:key="@string/pref_show_tutorial_key"
+            android:summary="@string/pref_show_tutorial_summary"
+            android:title="@string/pref_show_tutorial" />
+    </PreferenceCategory>
+    <PreferenceCategory android:title="@string/info" >
+        <Preference
+            style="?android:preferenceInformationStyle"
+            android:key="@string/pref_info_version_key"
+            android:title="@string/pref_info_version" />
+        <!-- <Preference -->
+        <!-- android:key="@string/pref_info_key" -->
+        <!-- android:title="@string/info" -->
+        <!-- android:summary="@string/pref_info_summary" /> -->
+        <Preference
+            android:key="@string/pref_report_a_bug_key"
+            android:summary="@string/pref_report_a_bug_summary"
+            android:title="@string/pref_report_a_bug" />
+
+        <com.leinardi.ubuntucountdownwidget.customviews.MyDialogPreference
+            android:dialogIcon="@drawable/ic_dialog_info"
+            android:dialogTitle="@string/changelog_title"
+            app:fileName="@string/changelog_filename"
+            android:key="@string/pref_changelog_key"
+            android:negativeButtonText="@null"
+            android:summary="@string/pref_display_changelog_summary"
+            android:title="@string/changelog_title" />
+        <com.leinardi.ubuntucountdownwidget.customviews.MyDialogPreference
+            android:dialogIcon="@drawable/ic_dialog_agenda"
+            android:dialogTitle="@string/eula_title"
+            app:fileName="@string/eula_filename"
+            android:key="@string/pref_eula_key"
+            android:negativeButtonText="@null"
+            android:summary="@string/pref_display_eula_summary"
+            android:title="@string/eula_title" />
+    </PreferenceCategory>
 
 </PreferenceScreen>
-

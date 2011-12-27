@@ -18,36 +18,41 @@
  */
 
 package com.leinardi.ubuntucountdownwidget.customviews;
-import com.leinardi.ubuntucountdownwidget.R;
-import com.leinardi.ubuntucountdownwidget.utils.Utils;
-
 
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.preference.DialogPreference;
 import android.util.AttributeSet;
 
+import com.leinardi.analytics.AnalyticsUtils;
+import com.leinardi.ubuntucountdownwidget.R;
+import com.leinardi.ubuntucountdownwidget.utils.Utils;
+
 public class DonateDialogPreference extends DialogPreference {
-	Context mContext;
-	String fileName;
+    Context mContext;
+    String fileName;
 
-	public DonateDialogPreference(Context context, AttributeSet attrs) {
-		super(context, attrs);
+    public DonateDialogPreference(Context context, AttributeSet attrs) {
+        super(context, attrs);
 
-		mContext= context;
-		TypedArray a = mContext.obtainStyledAttributes(attrs, R.styleable.MyDialogPreference);
-		fileName = a.getString(R.styleable.MyDialogPreference_fileName);
-	}
+        mContext = context;
+        TypedArray a = mContext.obtainStyledAttributes(attrs, R.styleable.MyDialogPreference);
+        fileName = a.getString(R.styleable.MyDialogPreference_fileName);
+    }
 
-//	protected void onPrepareDialogBuilder(Builder builder) {
-//		builder.setView(Utils.dialogWebView(mContext, fileName));
-//	}
+    // protected void onPrepareDialogBuilder(Builder builder) {
+    // builder.setView(Utils.dialogWebView(mContext, fileName));
+    // }
 
-	@Override
-	protected void onDialogClosed(boolean positiveResult) {
-		super.onDialogClosed(positiveResult);
-		if (positiveResult) {
-			Utils.getInstance().donate(mContext);
-		}
-	}
+    @Override
+    protected void onDialogClosed(boolean positiveResult) {
+        super.onDialogClosed(positiveResult);
+
+        AnalyticsUtils.getInstance(mContext).trackEvent(
+                "DonateDialog", "ButtonSelected", positiveResult ? "Yes" : "No", 0);
+
+        if (positiveResult) {
+            Utils.getInstance().donate(mContext);
+        }
+    }
 }
